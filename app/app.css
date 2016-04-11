@@ -1,4 +1,16 @@
 /* app css stylesheet */
+body {
+  height: 100%;
+}
+
+.border {
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.form {
+  margin-bottom: 15px;
+}
 
 .menu {
   list-style: none;
