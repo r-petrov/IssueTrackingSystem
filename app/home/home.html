@@ -1,31 +1,31 @@
 <div class="row">
     <div class="col-md-4 col-md-offset-1 border">
-        <form name="login-user-form">
+        <form name="loginUserForm">
             <label for="login-username">Username</label>
-            <input type="text" id="login-username" class="form-control form" />
+            <input type="text" id="login-username" class="form-control form" required="required" ng-model="loginUser.username" />
             <label for="login-password">Password</label>
-            <input type="password" id="login-password" class="form-control form" />
-            <button class="btn btn-primary" type="submit">Login</button>
+            <input type="password" id="login-password" class="form-control form" required="required" ng-model="loginUser.password" />
+            <button class="btn btn-primary" type="submit" ng-disabled="loginUserForm.$invalid" ng-click="login(loginUser)">Login</button>
         </form>
     </div>
 
     <div class="col-md-4 col-md-offset-2 border">
-        <form name="register-user-form">
-            <label for="register-username">Username</label>
-            <input type="text" id="register-username" class="form-control form" />
-            <label for="register-password">Password</label>
-            <input type="password" id="register-password" class="form-control form" />
-            <label for="register-confirm-password">Password</label>
-            <input type="password" id="register-confirm-password" class="form-control form" />
+        <form name="registerUserForm">
             <label for="register-name">Name</label>
-            <input type="text" id="register-name" class="form-control form" />
+            <input type="text" id="register-name" class="form-control form" ng-model="registerUser.name" />
+            <!--<label for="register-username">Username</label>
+            <input type="text" id="register-username" class="form-control form" ng-model="registerUser.username" />-->
             <label for="register-email">E-mail</label>
-            <input type="email" id="register-email" class="form-control form" />
+            <input type="email" id="register-email" class="form-control form" ng-model="registerUser.email" required="required" />
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" class="form-control form" ng-model="registerUser.password" required="required" minlength="6" maxlength="100"/>
+            <label for="register-confirm-password">Password</label>
+            <input type="password" id="register-confirm-password" class="form-control form" ng-model="registerUser.confirmPassword" minlength="6" maxlength="100"/>
             <label>Gender</label>
-            <input type="radio" name="register-gender" value="1" checked="checked">Male
-            <input type="radio" name="register-gender" value="2">Female
-            <input type="radio" name="register-gender" value="0">Other
-            <button class="btn btn-primary" type="submit">Register</button>
+            <input type="radio" name="register-gender" value="1" checked="checked" ng-model="registerUser.gender">Male
+            <input type="radio" name="register-gender" value="2" ng-model="registerUser.gender">Female
+            <input type="radio" name="register-gender" value="0" ng-model="registerUser.gender">Other
+            <button class="btn btn-primary" type="submit" ng-disabled="registerUserForm.$invalid || registerUser.password != registerUser.confirmPassword" ng-click="register(registerUser)">Register</button>
         </form>
     </div>
 </div>

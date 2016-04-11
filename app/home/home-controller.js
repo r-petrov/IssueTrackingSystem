@@ -10,5 +10,11 @@ angular.module('issueTrackingSystem.home', [])
         })
     }])
     .controller('HomeController', ['$scope', function($scope) {
-        $scope.hello = 'Zdrasti';
+        $scope.login = function(user) {
+            console.log(user);
+        };
+
+        $scope.register = function(user) {
+            console.log(user);
+        };
     }])
