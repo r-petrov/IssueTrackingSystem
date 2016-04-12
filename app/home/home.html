@@ -12,12 +12,12 @@
     <div class="col-md-4 col-md-offset-2 border">
         <form name="registerUserForm">
             <label for="register-email">E-mail</label>
-            <input type="email" id="register-email" class="form-control form" ng-model="registerUser.email" required="required" />
+            <input type="email" id="register-email" class="form-control form" ng-model="registerUser.Email" required="required" />
             <label for="register-password">Password</label>
-            <input type="password" id="register-password" class="form-control form" ng-model="registerUser.password" required="required" minlength="6" maxlength="100"/>
+            <input type="password" id="register-password" class="form-control form" ng-model="registerUser.Password" required="required" minlength="6" maxlength="100"/>
             <label for="register-confirm-password">Confirm password</label>
-            <input type="password" id="register-confirm-password" class="form-control form" ng-model="registerUser.confirmPassword" minlength="6" maxlength="100"/>
-            <button class="btn btn-primary" type="submit" ng-disabled="registerUserForm.$invalid || registerUser.password != registerUser.confirmPassword" ng-click="register(registerUser)">Register</button>
+            <input type="password" id="register-confirm-password" class="form-control form" ng-model="registerUser.ConfirmPassword" minlength="6" maxlength="100"/>
+            <button class="btn btn-primary" type="submit" ng-disabled="registerUserForm.$invalid || registerUser.Password != registerUser.ConfirmPassword" ng-click="register(registerUser)">Register</button>
         </form>
     </div>
 </div>
