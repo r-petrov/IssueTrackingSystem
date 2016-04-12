@@ -2,7 +2,7 @@
  * Created by PC on 11.04.2016 г..
  */
 'use strict'
-angular.module('issueTrackingSystem.home', [])
+angular.module('issueTrackingSystem.home', ['ngRoute'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: 'app/home/home.html',

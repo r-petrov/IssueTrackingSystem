@@ -3,8 +3,10 @@ body {
   height: 100%;
 }
 
-button {
-  margin: 0 auto;
+h2 {
+    text-align: center;
+    margin-bottom: 54px;
+    font-weight: bold;
 }
 
 .border {
