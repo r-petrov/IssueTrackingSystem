@@ -9,23 +9,47 @@ angular.module('issueTrackingSystem.users.authentication', [])
         'BASE_URL',
         function ($http, $q, BASE_URL) {
             function registerUser(user) {
-                var defer = $q.defer(),
+                var deferred = $q.defer(),
                     registerUrl = BASE_URL + 'api/Account/Register';
 
                 $http.post(registerUrl, user)
-                    .then(function(response){
-                        defer.resolve(response.data);
-                    },
-                    function(error){
-                        defer.reject(error);
+                    .then(function (success) {
+                        loginUser(user)
+                            .then(function(success) {
+                                //sessionStorage.token = token;
+                                deferred.resolve(success);
+                            },
+                            function(error) {
+                                console.log(error.message);
+                            });
+
+                    }, function (error) {
+                        deferred.reject(error);
                     });
 
-
-                return defer.promise;
+                return deferred.promise;
             }
 
-            function loginUser() {
+            function loginUser(user) {
+                var deffered = $q.defer(),
+                    authenticationUrl = BASE_URL + 'api/Token',
+                    authenticationBody = "grant_type=password&username=" + user.Email + "&password=" + user.Password,
+                    config = {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    };
 
+                $http.post(authenticationUrl, authenticationBody, config)
+                    .then(function (success) {
+                            var token = success.data.access_token;
+                            deffered.resolve(token);
+                        },
+                        function(error) {
+                            deffered.reject(error);
+                        });
+
+                return deffered.promise;
             }
 
             function logout() {

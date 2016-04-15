@@ -14,12 +14,22 @@ angular.module('issueTrackingSystem.home', [
     }])
     .controller('HomeController', ['$scope', 'authentication', function ($scope, authentication) {
         $scope.login = function (user) {
-            authentication.loginUser(user);
+            authentication.loginUser(user)
+                .then(function(success) {
+                    console.log(success);
+                },
+                function(error) {
+                    console.log('You entered incorrect email or password!');
+                });
         };
 
         $scope.register = function (user) {
             authentication.registerUser(user)
-                .then(function(registeredUser) {
+                .then(function(success) {
+                    console.log(success);
+                },
+                function(error) {
+                    console.log(error);
                 });
         };
     }]);
