@@ -4,7 +4,7 @@
 'use strict';
 angular.module('issueTrackingSystem.home', [
         'ngRoute',
-        'issueTrackingSystem.users.authentication'
+        'issueTrackingSystem.users.authenticationService'
     ])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
@@ -12,24 +12,32 @@ angular.module('issueTrackingSystem.home', [
             controller: 'HomeController'
         })
     }])
-    .controller('HomeController', ['$scope', 'authentication', function ($scope, authentication) {
-        $scope.login = function (user) {
-            authentication.loginUser(user)
-                .then(function(success) {
-                    console.log(success);
-                },
-                function(error) {
-                    console.log('You entered incorrect email or password!');
-                });
-        };
+    .controller('HomeController', ['$scope', '$cookies', '$window', '$location', 'authenticationService',
+        function HomeController($scope, $cookies, $window, $location, authenticationService) {
+            function manageUserAccess(accessToken) {
+                $cookies.put('accessToken', accessToken.toString());
+                $location.path('/dashboard');
+                $window.location.reload();
+            }
 
-        $scope.register = function (user) {
-            authentication.registerUser(user)
-                .then(function(success) {
-                    console.log(success);
-                },
-                function(error) {
-                    console.log(error);
-                });
-        };
+            $scope.login = function (user) {
+                authenticationService.loginUser(user)
+                    .then(function(accessToken) {
+                        manageUserAccess(accessToken);
+
+                    },
+                    function(error) {
+                        console.log('You entered incorrect email or password!');
+                    });
+            };
+
+            $scope.register = function (user) {
+                authenticationService.registerUser(user)
+                    .then(function(accessToken) {
+                        manageUserAccess(accessToken);
+                    },
+                    function(error) {
+                        console.log(error);
+                    });
+            };
     }]);

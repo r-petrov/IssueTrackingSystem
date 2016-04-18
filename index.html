@@ -16,12 +16,17 @@
     <script src="app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
-<body class="jumbotron">
+<body ng-controller="MainController" class="jumbotron">
     <header>
         <h2>
             Issue Tracking System
         </h2>
     </header>
+
+    <div ng-show="isAuthenticated" class="buttons">
+        <button class="btn btn-primary button">Change Password</button>
+        <button class="btn btn-primary button"><a href="#/logout">Logout</a></button>
+    </div>
     <div class="container">
         <div ng-view></div>
     </div>
@@ -29,9 +34,16 @@
     <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="app/bower_components/angular/angular.js"></script>
+    <script src="app/bower_components/angular/angular-cookies.js"></script>
     <script src="app/bower_components/angular-route/angular-route.js"></script>
     <script src="app/app.js"></script>
+    <script src="app/common/main-controller.js"></script>
+    <script src="app/common/previous-page-directive.js"></script>
     <script src="app/home/home-controller.js"></script>
-    <script src="app/users/authentication.js"></script>
+    <script src="app/users/authentication-service.js"></script>
+    <script src="app/users/identity-service.js"></script>
+    <script src="app/dashboard/dashboard-service.js"></script>
+    <script src="app/dashboard/dashboard-controller.js"></script>
+    <script src="app/logout/logout-controller.js"></script>
 </body>
 </html>

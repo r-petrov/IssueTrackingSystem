@@ -2,12 +2,12 @@
  * Created by PC on 11.04.2016 г..
  */
 'use strict';
-angular.module('issueTrackingSystem.users.authentication', [])
-    .factory('authentication', [
+angular.module('issueTrackingSystem.users.authenticationService', [])
+    .factory('authenticationService', [
         '$http',
         '$q',
         'BASE_URL',
-        function ($http, $q, BASE_URL) {
+        function authenticationService($http, $q, BASE_URL) {
             function registerUser(user) {
                 var deferred = $q.defer(),
                     registerUrl = BASE_URL + 'api/Account/Register';
@@ -15,9 +15,10 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 $http.post(registerUrl, user)
                     .then(function (success) {
                         loginUser(user)
-                            .then(function(success) {
+                            .then(function(accessToken) {
                                 //sessionStorage.token = token;
-                                deferred.resolve(success);
+                                deferred.resolve(accessToken);
+                                console.log(accessToken);
                             },
                             function(error) {
                                 console.log(error.message);
@@ -31,7 +32,7 @@ angular.module('issueTrackingSystem.users.authentication', [])
             }
 
             function loginUser(user) {
-                var deffered = $q.defer(),
+                var deferred = $q.defer(),
                     authenticationUrl = BASE_URL + 'api/Token',
                     authenticationBody = "grant_type=password&username=" + user.Email + "&password=" + user.Password,
                     config = {
@@ -41,19 +42,31 @@ angular.module('issueTrackingSystem.users.authentication', [])
                     };
 
                 $http.post(authenticationUrl, authenticationBody, config)
-                    .then(function (success) {
-                            var token = success.data.access_token;
-                            deffered.resolve(token);
+                    .then(function (loggedInUser) {
+                            var accessToken = loggedInUser.data.access_token;
+                            deferred.resolve(accessToken);
                         },
                         function(error) {
-                            deffered.reject(error);
+                            deferred.reject(error);
                         });
 
-                return deffered.promise;
+                return deferred.promise;
             }
 
-            function logout() {
+            function logout(currentUser) {
+                var deferred = $q.defer(),
+                    logoutUrl = BASE_URL + 'api/Account/Logout';
 
+
+                $http.post(logoutUrl, currentUser)
+                    .then(function(success) {
+                        deferred.resolve(success);
+                    },
+                    function(error) {
+                        deferred.reject(error);
+                    });
+
+                return deferred.promise;
             }
 
             return {
@@ -61,4 +74,4 @@ angular.module('issueTrackingSystem.users.authentication', [])
                 loginUser: loginUser,
                 logout: logout
             }
-        }])
+        }]);
