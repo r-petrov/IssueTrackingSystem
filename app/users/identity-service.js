@@ -22,12 +22,7 @@ angular.module('issueTrackingSystem.users.identityService', [])
             }
 
             function isAuthenticated() {
-                if(accessToken) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
+                return !!accessToken;
             }
 
             if (accessToken) {

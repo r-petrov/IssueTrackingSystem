@@ -24,7 +24,6 @@ angular.module('issueTrackingSystem.home', [
                 authenticationService.loginUser(user)
                     .then(function(accessToken) {
                         manageUserAccess(accessToken);
-
                     },
                     function(error) {
                         console.log('You entered incorrect email or password!');

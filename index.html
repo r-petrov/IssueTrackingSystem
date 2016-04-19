@@ -17,33 +17,39 @@
 </head>
 
 <body ng-controller="MainController" class="jumbotron">
-    <header>
-        <h2>
-            Issue Tracking System
-        </h2>
-    </header>
+    <div ng-controller="PreviousPageController">
+        <header>
+            <h2>
+                Issue Tracking System
+            </h2>
+        </header>
 
-    <div ng-show="isAuthenticated" class="buttons">
-        <button class="btn btn-primary button">Change Password</button>
-        <button class="btn btn-primary button"><a href="#/logout">Logout</a></button>
-    </div>
-    <div class="container">
-        <div ng-view></div>
-    </div>
+        <div ng-if="isAuthenticated" class="index-buttons">
+            <button class="btn btn-primary button"><a href="#/profile/password">Change Password</a></button>
+            <button class="btn btn-primary button"><a href="#/logout">Logout</a></button>
+        </div>
 
-    <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="app/bower_components/angular/angular.js"></script>
-    <script src="app/bower_components/angular/angular-cookies.js"></script>
-    <script src="app/bower_components/angular-route/angular-route.js"></script>
-    <script src="app/app.js"></script>
-    <script src="app/common/main-controller.js"></script>
-    <script src="app/common/previous-page-directive.js"></script>
-    <script src="app/home/home-controller.js"></script>
-    <script src="app/users/authentication-service.js"></script>
-    <script src="app/users/identity-service.js"></script>
-    <script src="app/dashboard/dashboard-service.js"></script>
-    <script src="app/dashboard/dashboard-controller.js"></script>
-    <script src="app/logout/logout-controller.js"></script>
+        <div class="container">
+            <div ng-view></div>
+        </div>
+
+        <script src="app/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="app/bower_components/angular/angular.js"></script>
+        <script src="app/bower_components/angular/angular-cookies.js"></script>
+        <script src="app/bower_components/angular-route/angular-route.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/common/main-controller.js"></script>
+        <script src="app/common/previous-page-controller.js"></script>
+        <script src="app/home/home-controller.js"></script>
+        <script src="app/users/authentication-service.js"></script>
+        <script src="app/users/identity-service.js"></script>
+        <script src="app/dashboard/dashboard-service.js"></script>
+        <script src="app/dashboard/dashboard-controller.js"></script>
+        <script src="app/change-password/change-password-service.js"></script>
+        <script src="app/change-password/change-password-controller.js"></script>
+        <script src="app/dashboard/dashboard-controller.js"></script>
+        <script src="app/logout/logout-controller.js"></script>
+    </div>
 </body>
 </html>

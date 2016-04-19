@@ -9,8 +9,17 @@ h2 {
     font-weight: bold;
 }
 
+h3 {
+    text-align: left;
+    font-weight: bold;
+}
+
 .buttons {
   text-align: center;
+}
+
+.index-buttons {
+  text-align: right;
   /*margin-bottom: 21px;*/
 }
 
