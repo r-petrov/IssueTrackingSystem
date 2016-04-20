@@ -5,9 +5,14 @@ angular.module('issueTrackingSystem.dashboard', ['ngRoute'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/dashboard', {
             templateUrl: 'app/dashboard/dashboard.html',
-            controller: 'DashboardController'
-        })
+            controller: 'DashboardController',
+            resolve: {
+                loggedInUser: function(identityService) {
+                    return identityService.getCurrentUser();
+                }
+            }
+        });
     }])
-    .controller('DashboardController', ['$scope', function DashboardController($scope) {
-
-    }])
+    .controller('DashboardController', ['$scope', 'loggedInUser', function DashboardController($scope, loggedInUser) {
+        $scope.loggedInUser = loggedInUser;
+    }]);

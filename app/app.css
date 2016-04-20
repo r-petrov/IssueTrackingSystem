@@ -14,13 +14,17 @@ h3 {
     font-weight: bold;
 }
 
-.buttons {
-  text-align: center;
+.right {
+    margin-left: auto;
 }
 
 .index-buttons {
-  text-align: right;
-  /*margin-bottom: 21px;*/
+    display: flex;
+    justify-content: space-between;
+}
+
+.center {
+  text-align: center;
 }
 
 .button {
@@ -47,26 +51,4 @@ h3 {
   border-bottom: 0.1em solid black;
   margin-bottom: 2em;
   padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
 }

@@ -16,4 +16,7 @@ angular.module('issueTrackingSystem', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/'});
     }])
-    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');
+    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
+    /*.value('user', function(identityService) {
+        return identityService.getCurrentUser();
+    })*/;

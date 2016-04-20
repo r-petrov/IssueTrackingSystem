@@ -5,7 +5,12 @@ angular.module('issueTrackingSystem.changePassword.changePasswordController', []
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/profile/password', {
             templateUrl: 'app/change-password/change-password.html',
-            controller: 'ChangePasswordController'
+            controller: 'ChangePasswordController',
+            resolve: {
+                loggedInUser: function(identityService) {
+                    return identityService.getCurrentUser();
+                }
+            }
         })
     }])
     .controller('ChangePasswordController', [

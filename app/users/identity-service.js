@@ -6,8 +6,9 @@ angular.module('issueTrackingSystem.users.identityService', [])
         '$cookies',
         '$http',
         '$q',
+        '$location',
         'BASE_URL',
-        function identityService($cookies, $http, $q, BASE_URL) {
+        function identityService($cookies, $http, $q, $location, BASE_URL) {
             var deferred = $q.defer(),
                 currentUser = undefined,
                 accessToken = $cookies.get('accessToken');
@@ -30,15 +31,16 @@ angular.module('issueTrackingSystem.users.identityService', [])
             }
 
             $http.get(BASE_URL + 'Users/me')
-                .then(function (success) {
-                        deferred.resolve(success);
+                .then(function (loggedInUser) {
+                        deferred.resolve(loggedInUser);
                     },
                     function (error) {
                         deferred.reject(error);
+                        $location.url('/');
                     });
 
             return {
                 getCurrentUser: getCurrentUser,
-                isAuthenticated: isAuthenticated
+                isAuthenticated: isAuthenticated,
             }
         }]);

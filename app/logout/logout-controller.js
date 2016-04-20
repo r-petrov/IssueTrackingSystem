@@ -8,7 +8,12 @@ angular.module('issueTrackingSystem.logout', [
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/logout', {
             templateUrl: 'app/logout/logout.html',
-            controller: 'LogoutController'
+            controller: 'LogoutController',
+            resolve: {
+                loggedInUser: function(identityService) {
+                    return identityService.getCurrentUser();
+                }
+            }
         });
     }])
     .controller('LogoutController', ['$scope', '$cookies', '$window', 'authenticationService',
