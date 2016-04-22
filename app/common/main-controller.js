@@ -8,7 +8,9 @@ angular.module('issueTrackingSystem.common.mainController', [])
         identityService.getCurrentUser()
             .then(function(currentUser) {
                 $scope.currentUser = currentUser;
+                console.log($scope.currentUser);
                 $scope.isAdmin = currentUser.data.isAdmin;
+                console.log($scope.isAdmin);
             },
             function(error) {
                 console.log(error);

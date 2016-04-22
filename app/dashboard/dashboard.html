@@ -1,5 +1,5 @@
 <div>
-    <h3>Dashboard</h3>
+    <h2>Dashboard</h2>
     <table class="table table-striped">
         <thead>
             <th>
@@ -10,7 +10,7 @@
             </th>
         </thead>
         <tbody>
-            <tr>
+            <!--<tr>
                 <td>
                     SIT
                 </td>
@@ -30,6 +30,31 @@
                                 <td>Super</td>
                                 <td>SIT</td>
                                 <td>28/03/2016</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>-->
+            <tr ng-repeat="issue in issues">
+                <td class="project-name" style="vertical-align: middle">
+                    {{issue.projectName}}
+                </td>
+                <td>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Project</th>
+                                <th>Due Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="currentIssue in issue.issuesByProject">
+                                <td>{{currentIssue.Title}}</td>
+                                <td>{{currentIssue.Description}}</td>
+                                <td>{{currentIssue.Project.Name}}</td>
+                                <td>{{currentIssue.DueDate}}</td>
                             </tr>
                         </tbody>
                     </table>
