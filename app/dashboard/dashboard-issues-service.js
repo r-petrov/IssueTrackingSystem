@@ -30,6 +30,7 @@ angular.module('issueTrackingSystem.dashboard.dashboardIssuesService', [])
                                     projectIssues.sort(function(a, b) {
                                         return new Date(b.DueDate) - new Date(a.DueDate);
                                     });
+
                                     issuesByProjects.push(projectIssues);
                                     projectIssues = [];
                                     projectIssues.push(currentIssue);
@@ -40,6 +41,7 @@ angular.module('issueTrackingSystem.dashboard.dashboardIssuesService', [])
                                     projectIssues.sort(function(a, b) {
                                         return new Date(b.DueDate) - new Date(a.DueDate);
                                     });
+
                                     issuesByProjects.push(projectIssues);
                                 }
                             }

@@ -31,8 +31,6 @@ angular.module('issueTrackingSystem.dashboard.dashboardController', ['ngRoute', 
                             };
                         $scope.issues.push(currentIssuesByProject);
                     }
-
-                    console.log($scope.issues);
                 },
                 function(error) {
                     console.log(error);

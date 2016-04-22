@@ -2,39 +2,16 @@
     <h2>Dashboard</h2>
     <table class="table table-striped">
         <thead>
-            <th>
-                <h3>Affiliated projects</h3>
-            </th>
-            <th>
-                <h3>Issues</h3>
-            </th>
+            <tr>
+                <th>
+                    <h3>Affiliated projects</h3>
+                </th>
+                <th>
+                    <h3>Issues</h3>
+                </th>
+            </tr>
         </thead>
         <tbody>
-            <!--<tr>
-                <td>
-                    SIT
-                </td>
-                <td>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Project</th>
-                                <th>Due Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Bad Request has no message describing the problem</td>
-                                <td>Super</td>
-                                <td>SIT</td>
-                                <td>28/03/2016</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>-->
             <tr ng-repeat="issue in issues">
                 <td class="project-name" style="vertical-align: middle">
                     {{issue.projectName}}
@@ -51,7 +28,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="currentIssue in issue.issuesByProject">
-                                <td>{{currentIssue.Title}}</td>
+                                <td><a href="#/issues/:currentIssue.Id">{{currentIssue.Title}}</a></td>
                                 <td>{{currentIssue.Description}}</td>
                                 <td>{{currentIssue.Project.Name}}</td>
                                 <td>{{currentIssue.DueDate}}</td>
@@ -62,5 +39,4 @@
             </tr>
         </tbody>
     </table>
-
 </div>

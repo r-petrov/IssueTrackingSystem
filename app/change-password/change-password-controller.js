@@ -21,7 +21,6 @@ angular.module('issueTrackingSystem.changePassword.changePasswordController', []
             $scope.changePassword = function(passwordData) {
                 changePasswordService.changePassword(passwordData)
                     .then(function(success) {
-                        console.log(success);
                         $window.history.back();
                     })
             }
