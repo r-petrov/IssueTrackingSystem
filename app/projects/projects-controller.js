@@ -21,7 +21,6 @@ angular.module('issueTrackingSystem.projects.projectsController',
         function($scope, projectsService) {
             projectsService.getProjects()
                 .then(function(projects) {
-                    console.log(projects.data);
                     $scope.projects = projects.data;
                 })
         }]);

@@ -18,13 +18,13 @@ angular.module('issueTrackingSystem.dashboard.dashboardController', ['ngRoute', 
         'dashboardIssuesService',
         'loggedInUser',
         function DashboardController($scope, dashboardIssuesService, loggedInUser) {
-            $scope.loggedInUser = loggedInUser;
+            //$scope.loggedInUser = loggedInUser;
             dashboardIssuesService.getIssuesByProjects()
                 .then(function(issuesByProjects) {
                     $scope.issues = [];
                     for (var key in issuesByProjects) {
                         var currentIssues = issuesByProjects[key],
-                            currentProjectName = currentIssues[0].Project.Name
+                            currentProjectName = currentIssues[0].Project.Name;
                             currentIssuesByProject = {
                                 projectName: currentProjectName,
                                 issuesByProject: currentIssues

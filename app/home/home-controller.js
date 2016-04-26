@@ -12,18 +12,23 @@ angular.module('issueTrackingSystem.home', [
             controller: 'HomeController'
         })
     }])
-    .controller('HomeController', ['$scope', '$cookies', '$window', '$location', 'authenticationService',
+    .controller('HomeController', [
+        '$scope',
+        '$cookies',
+        '$window',
+        '$location',
+        'authenticationService',
         function HomeController($scope, $cookies, $window, $location, authenticationService) {
-            function manageUserAccess(accessToken) {
-                $cookies.put('accessToken', accessToken.toString());
+            /*function manageUserAccess(accessToken) {
+                //$cookies.put('accessToken', accessToken.toString());
                 $location.path('/dashboard');
-                $window.location.reload();
-            }
+                //$window.location.reload();
+            }*/
 
             $scope.login = function (user) {
                 authenticationService.loginUser(user)
-                    .then(function(accessToken) {
-                        manageUserAccess(accessToken);
+                    .then(function(loggedInUser) {
+                        $location.path('/dashboard');
                     },
                     function(error) {
                         console.log('You entered incorrect email or password!');
@@ -32,8 +37,8 @@ angular.module('issueTrackingSystem.home', [
 
             $scope.register = function (user) {
                 authenticationService.registerUser(user)
-                    .then(function(accessToken) {
-                        manageUserAccess(accessToken);
+                    .then(function(loggedInUser) {
+                        $location.path('/dashboard');
                     },
                     function(error) {
                         console.log(error);

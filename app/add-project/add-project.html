@@ -1,0 +1,38 @@
+<div ng-controller="GetUsersController" class="jumbotron">
+    <header>
+        <h3>
+            New Project
+        </h3>
+    </header>
+    <form name="addProjectForm" class="col-md-6 col-md-offset-2 border">
+        <label for="name">
+            Name
+        </label>
+        <input ng-model="project.Name" id="name" type="text" required="required" placeholder="Project Name">
+        <label for="description">
+            Description
+        </label>
+        <textarea ng-model="project.Description" id="description" required="required" placeholder="Description"></textarea>
+        <label for="project-key">
+            Project Key
+        </label>
+        <input ng-model="project.ProjectKey" id="project-key" type="text" required="required" placeholder="Project Key">
+        <label for="leadId">
+            LeadId
+        </label>
+        <select ng-model="project.LeadId" id="leadId" type="text" required="required">
+            <option ng-repeat="user in users" value="{{user.Id}}" >{{user.Username}}</option>
+        </select>
+        <label for="priorities">
+            Priorities (comma separated)
+        </label>
+        <input ng-model="project.Priorities" id="priorities" type="text" required="required" placeholder="Priorities">
+        <label for="labels">
+            Labels (comma separated)
+        </label>
+        <input ng-model="project.Labels" id="labels" type="text" placeholder="Labels">
+    </form>
+    <button ng-disabled="addProjectForm.$invalid || addProjectForm.$pending" ng-click="addProject(project)" class="btn btn-primary button" type="submit">
+        Add Project
+    </button>
+</div>

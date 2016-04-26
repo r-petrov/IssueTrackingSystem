@@ -16,13 +16,13 @@ angular.module('issueTrackingSystem.logout', [
             }
         });
     }])
-    .controller('LogoutController', ['$scope', '$cookies', '$window', 'authenticationService',
-        function LogoutController($scope, $cookies, $window, authenticationService) {
+    .controller('LogoutController', ['$scope', '$cookies', '$location', '$window', 'authenticationService',
+        function LogoutController($scope, $cookies, $location,  $window, authenticationService) {
             $scope.logout = function(currentUser) {
                 authenticationService.logout(currentUser)
                     .then(function(success) {
-                        $cookies.remove('accessToken');
-                        $window.location.href = '#/';
+                        $location.path('/');
+                        //$window.location.href = '#/';
                         $window.location.reload();
                     });
             }

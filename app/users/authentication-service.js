@@ -6,8 +6,12 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
     .factory('authenticationService', [
         '$http',
         '$q',
+        '$cookies',
+        'identityService',
         'BASE_URL',
-        function authenticationService($http, $q, BASE_URL) {
+        function authenticationService($http, $q, $cookies, identityService, BASE_URL) {
+            var AUTHENTICATION_COOKIE_KEY = 'AUTHENTICATION_COOKIE_KEY';
+
             function registerUser(user) {
                 var deferred = $q.defer(),
                     registerUrl = BASE_URL + 'api/Account/Register';
@@ -15,13 +19,12 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
                 $http.post(registerUrl, user)
                     .then(function (success) {
                         loginUser(user)
-                            .then(function(accessToken) {
+                            .then(function(loggedInUser) {
                                 //sessionStorage.token = token;
-                                deferred.resolve(accessToken);
-                                console.log(accessToken);
+                                deferred.resolve(loggedInUser);
                             },
                             function(error) {
-                                console.log(error.message);
+                                console.log(error);
                             });
 
                     }, function (error) {
@@ -44,13 +47,38 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
                 $http.post(authenticationUrl, authenticationBody, config)
                     .then(function (loggedInUser) {
                             var accessToken = loggedInUser.data.access_token;
-                            deferred.resolve(accessToken);
+
+                            $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
+                            $cookies.put(AUTHENTICATION_COOKIE_KEY, accessToken);
+                            identityService.requestUserProfile()
+                                .then(function(success) {
+                                    deferred.resolve(loggedInUser.data);
+                                },
+                                function(error) {
+                                    console.log(error);
+                                })
+
                         },
                         function(error) {
                             deferred.reject(error);
                         });
 
                 return deferred.promise;
+            }
+
+            function isAuthenticated() {
+                return !!$cookies.get(AUTHENTICATION_COOKIE_KEY);
+            }
+
+            function refreshCookie() {
+                //var isAuthenticated = isAuthenticated();
+                if (isAuthenticated()) {
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get(AUTHENTICATION_COOKIE_KEY);
+                    identityService.requestUserProfile()
+                        .then(function(success) {
+                            console.log(success);
+                        });
+                }
             }
 
             function logout(currentUser) {
@@ -60,6 +88,9 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
 
                 $http.post(logoutUrl, currentUser)
                     .then(function(success) {
+                        $cookies.remove(AUTHENTICATION_COOKIE_KEY);
+                        $http.defaults.headers.common.Authorization = undefined;
+                        identityService.requestUserProfile();
                         deferred.resolve(success);
                     },
                     function(error) {
@@ -72,6 +103,8 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
             return {
                 registerUser: registerUser,
                 loginUser: loginUser,
+                isAuthenticated: isAuthenticated,
+                refreshCookie: refreshCookie,
                 logout: logout
             }
         }]);

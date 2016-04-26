@@ -20,6 +20,10 @@ table th, td {
     vertical-align: middle;
 }
 
+label {
+    display: block;
+}
+
 .right {
     margin-left: auto;
 }

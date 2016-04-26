@@ -22,25 +22,30 @@ angular.module('issueTrackingSystem.users.identityService', [])
                 }
             }
 
-            function isAuthenticated() {
-                return !!accessToken;
+            function removeCurrentUser() {
+                currentUser = undefined;
             }
 
-            if (accessToken) {
-                $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
-            }
+            function requestUserProfile() {
+                var userProfileDeffered = $q.defer();
 
-            $http.get(BASE_URL + 'Users/me')
-                .then(function (loggedInUser) {
-                        deferred.resolve(loggedInUser);
-                    },
-                    function (error) {
-                        deferred.reject(error);
-                        $location.url('/');
-                    });
+                $http.get(BASE_URL + 'Users/me')
+                    .then(function (loggedInUser) {
+                            currentUser = loggedInUser;
+                            deferred.resolve(currentUser);
+                            userProfileDeffered.resolve();
+                        },
+                        function (error) {
+                            deferred.reject(error);
+                            $location.path('/');
+                        });
+
+                return userProfileDeffered.promise;
+            }
 
             return {
                 getCurrentUser: getCurrentUser,
-                isAuthenticated: isAuthenticated,
+                removeCurrentUser: removeCurrentUser,
+                requestUserProfile: requestUserProfile,
             }
         }]);

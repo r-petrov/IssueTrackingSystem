@@ -7,9 +7,10 @@ angular.module('issueTrackingSystem.dashboard.dashboardService', [])
         '$q',
         'BASE_URL',
         function dashboardService($http, $q, BASE_URL) {
-            function getAssigneeUsersIssues() {
+            function getAssigneeUsersIssues(pageSize) {
                 var deferred = $q.defer(),
-                    assigneeUsersIssuesUrl = BASE_URL + 'Issues/me?pageSize=40&pageNumber=1&orderBy=Project.Name';
+                    pageSize = pageSize || 40,
+                    assigneeUsersIssuesUrl = BASE_URL + 'Issues/me?pageSize=' + pageSize + '&pageNumber=1&orderBy=Project.Name';
 
                 $http.get(assigneeUsersIssuesUrl)
                     .then(function(assigneeUsersIssues) {

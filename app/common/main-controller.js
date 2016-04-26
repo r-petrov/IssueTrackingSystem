@@ -2,17 +2,20 @@
  * Created by PC on 16.04.2016 г..
  */
 angular.module('issueTrackingSystem.common.mainController', [])
-    .controller('MainController', ['$scope', 'identityService', function MainController($scope, identityService) {
-        $scope.isAuthenticated = identityService.isAuthenticated();
-
-        identityService.getCurrentUser()
-            .then(function(currentUser) {
-                $scope.currentUser = currentUser;
-                console.log($scope.currentUser);
-                $scope.isAdmin = currentUser.data.isAdmin;
-                console.log($scope.isAdmin);
-            },
-            function(error) {
-                console.log(error);
-            });
-    }]);
+    .controller('MainController', [
+        '$rootScope',
+        'identityService',
+        function MainController($rootScope, identityService) {
+            identityService.getCurrentUser()
+                .then(function(currentUser) {
+                    debugger;
+                    $rootScope.currentUser = currentUser;
+                    console.log($rootScope.currentUser);
+                    $rootScope.isAdmin = currentUser.data.isAdmin;
+                    console.log($rootScope.isAdmin);
+                    $rootScope.isAuthenticated = true;
+                },
+                function(error) {
+                    console.log(error);
+                });
+        }]);
