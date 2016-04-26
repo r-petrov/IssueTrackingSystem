@@ -1,7 +1,7 @@
 /**
  * Created by PC on 22.04.2016 г..
  */
-angular.module('issueTrackingSystem.addProject.getUsersService', [])
+angular.module('issueTrackingSystem.common.getUsersService', [])
     .factory('getUsersService', [
         '$http',
         '$q',

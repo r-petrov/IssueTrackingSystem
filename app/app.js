@@ -6,6 +6,8 @@ angular.module('issueTrackingSystem', [
         'ngCookies',
         'issueTrackingSystem.common.mainController',
         'issueTrackingSystem.common.previousPageController',
+        'issueTrackingSystem.common.getUsersController',
+        'issueTrackingSystem.common.getUsersService',
         'issueTrackingSystem.home',
         'issueTrackingSystem.users.identityService',
         'issueTrackingSystem.dashboard.dashboardController',
@@ -18,8 +20,6 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.projects.projectsController',
         'issueTrackingSystem.addProject.addProjectController',
         'issueTrackingSystem.addProject.addProjectService',
-        'issueTrackingSystem.addProject.getUsersController',
-        'issueTrackingSystem.addProject.getUsersService',
     ])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/'});
