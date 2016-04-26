@@ -27,20 +27,21 @@ angular.module('issueTrackingSystem.users.identityService', [])
             }
 
             function requestUserProfile() {
-                var userProfileDeffered = $q.defer();
+                var userProfileDeferred = $q.defer();
 
                 $http.get(BASE_URL + 'Users/me')
                     .then(function (loggedInUser) {
+                        console.log(loggedInUser);
                             currentUser = loggedInUser;
                             deferred.resolve(currentUser);
-                            userProfileDeffered.resolve();
+                            userProfileDeferred.resolve();
                         },
                         function (error) {
                             deferred.reject(error);
                             $location.path('/');
                         });
 
-                return userProfileDeffered.promise;
+                return userProfileDeferred.promise;
             }
 
             return {

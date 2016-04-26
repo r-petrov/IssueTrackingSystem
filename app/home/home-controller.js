@@ -17,7 +17,6 @@ angular.module('issueTrackingSystem.home', [
         '$location',
         'authenticationService',
         function HomeController($scope, $location, authenticationService) {
-
             if (authenticationService.isAuthenticated()) {
                 $location.path('/dashboard');
             }
@@ -26,6 +25,7 @@ angular.module('issueTrackingSystem.home', [
                 authenticationService.loginUser(user)
                     .then(function(loggedInUser) {
                         $location.path('/dashboard');
+                        authenticationService.refreshCookie();
                     },
                     function(error) {
                         console.log('You entered incorrect email or password!');
@@ -36,6 +36,7 @@ angular.module('issueTrackingSystem.home', [
                 authenticationService.registerUser(user)
                     .then(function(loggedInUser) {
                         $location.path('/dashboard');
+                        authenticationService.refreshCookie();
                     },
                     function(error) {
                         console.log(error);

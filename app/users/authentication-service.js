@@ -46,13 +46,15 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
 
                 $http.post(authenticationUrl, authenticationBody, config)
                     .then(function (loggedInUser) {
+                        //console.log(loggedInUser);
                         var accessToken = loggedInUser.data.access_token;
 
                         $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
                         $cookies.put(AUTHENTICATION_COOKIE_KEY, accessToken);
                         identityService.requestUserProfile()
                             .then(function(success) {
-                                deferred.resolve(loggedInUser.data);
+                                deferred.resolve(loggedInUser);
+                                console.log(loggedInUser);
                             }, function(error) {
                                 console.log(error);
                             })
@@ -71,10 +73,7 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
             function refreshCookie() {
                 if (isAuthenticated()) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get(AUTHENTICATION_COOKIE_KEY);
-                    identityService.requestUserProfile()
-                        .then(function(success) {
-                            console.log(success);
-                        });
+                    identityService.requestUserProfile();
                 }
             }
 
@@ -86,7 +85,7 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
                     .then(function(success) {
                         $cookies.remove(AUTHENTICATION_COOKIE_KEY);
                         $http.defaults.headers.common.Authorization = undefined;
-                        identityService.requestUserProfile();
+                        identityService.removeCurrentUser();
                         deferred.resolve(success);
                     },
                     function(error) {

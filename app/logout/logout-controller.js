@@ -16,13 +16,15 @@ angular.module('issueTrackingSystem.logout', [
             }
         });
     }])
-    .controller('LogoutController', ['$scope', '$rootScope', '$location', 'authenticationService',
-        function LogoutController($scope, $rootScope, $location,  authenticationService) {
+    .controller('LogoutController', ['$scope', '$rootScope', '$location', '$window', 'authenticationService',
+        function LogoutController($scope, $rootScope, $location,  $window, authenticationService) {
             $scope.logout = function(currentUser) {
                 authenticationService.logout(currentUser)
                     .then(function(success) {
                         $location.path('/');
-                        $rootScope.isAuthenticated = false;
+                        //$window.location.href = '#/';
+                        $window.location.reload();
+                        //$rootScope.isAuthenticated = false;
                     });
             }
     }]);
