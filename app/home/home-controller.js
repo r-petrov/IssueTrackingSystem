@@ -14,16 +14,13 @@ angular.module('issueTrackingSystem.home', [
     }])
     .controller('HomeController', [
         '$scope',
-        '$cookies',
-        '$window',
         '$location',
         'authenticationService',
-        function HomeController($scope, $cookies, $window, $location, authenticationService) {
-            /*function manageUserAccess(accessToken) {
-                //$cookies.put('accessToken', accessToken.toString());
+        function HomeController($scope, $location, authenticationService) {
+
+            if (authenticationService.isAuthenticated()) {
                 $location.path('/dashboard');
-                //$window.location.reload();
-            }*/
+            }
 
             $scope.login = function (user) {
                 authenticationService.loginUser(user)

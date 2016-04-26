@@ -8,7 +8,6 @@ angular.module('issueTrackingSystem.common.mainController', [])
         function MainController($rootScope, identityService) {
             identityService.getCurrentUser()
                 .then(function(currentUser) {
-                    debugger;
                     $rootScope.currentUser = currentUser;
                     console.log($rootScope.currentUser);
                     $rootScope.isAdmin = currentUser.data.isAdmin;

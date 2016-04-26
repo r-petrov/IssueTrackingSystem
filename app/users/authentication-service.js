@@ -46,22 +46,20 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
 
                 $http.post(authenticationUrl, authenticationBody, config)
                     .then(function (loggedInUser) {
-                            var accessToken = loggedInUser.data.access_token;
+                        var accessToken = loggedInUser.data.access_token;
 
-                            $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
-                            $cookies.put(AUTHENTICATION_COOKIE_KEY, accessToken);
-                            identityService.requestUserProfile()
-                                .then(function(success) {
-                                    deferred.resolve(loggedInUser.data);
-                                },
-                                function(error) {
-                                    console.log(error);
-                                })
+                        $http.defaults.headers.common.Authorization = 'Bearer ' + accessToken;
+                        $cookies.put(AUTHENTICATION_COOKIE_KEY, accessToken);
+                        identityService.requestUserProfile()
+                            .then(function(success) {
+                                deferred.resolve(loggedInUser.data);
+                            }, function(error) {
+                                console.log(error);
+                            })
 
-                        },
-                        function(error) {
-                            deferred.reject(error);
-                        });
+                    }, function(error) {
+                        deferred.reject(error);
+                    });
 
                 return deferred.promise;
             }
@@ -71,7 +69,6 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
             }
 
             function refreshCookie() {
-                //var isAuthenticated = isAuthenticated();
                 if (isAuthenticated()) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get(AUTHENTICATION_COOKIE_KEY);
                     identityService.requestUserProfile()
@@ -84,7 +81,6 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
             function logout(currentUser) {
                 var deferred = $q.defer(),
                     logoutUrl = BASE_URL + 'api/Account/Logout';
-
 
                 $http.post(logoutUrl, currentUser)
                     .then(function(success) {
