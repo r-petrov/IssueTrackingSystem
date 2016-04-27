@@ -21,7 +21,25 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.common.getUsersController',
         'issueTrackingSystem.common.getUsersService',
     ])
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+        $httpProvider.interceptors.push(['$q', 'toastr', function($q, toastr) {
+            return {
+                'responseError': function(rejection) {
+                    if (rejection.data && rejection.data['error_description']) {
+                        toastr.error(rejection.data['error_description']);
+                    }
+                    else if(rejection.data && rejection.data.ModelState && rejection.data.ModelState['']) {
+                        var errors = rejection.data.ModelState[''];
+                        if (errors.length > 0) {
+                            toastr.error(errors[0]);
+                        }
+                    }
+
+                    return $q.reject(rejection);
+                }
+            }
+        }]);
+
         $routeProvider.otherwise({redirectTo: '/'});
     }])
     .run(['$rootScope', '$location', 'authenticationService', function($rootScope, $location, authenticationService) {
@@ -56,4 +74,5 @@ angular.module('issueTrackingSystem', [
             }
         }
     }])*/
+    .constant('toastr', toastr)
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');

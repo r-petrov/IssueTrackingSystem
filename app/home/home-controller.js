@@ -28,7 +28,7 @@ angular.module('issueTrackingSystem.home', [
                         $location.path('/dashboard');
                     },
                     function(error) {
-                        console.log('You entered incorrect email or password!');
+                        console.log(error);
                     });
             };
 
