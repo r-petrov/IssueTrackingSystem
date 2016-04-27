@@ -24,10 +24,36 @@ angular.module('issueTrackingSystem', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/'});
     }])
-    .run(['authenticationService', function(authenticationService) {
+    .run(['$rootScope', '$location', 'authenticationService', function($rootScope, $location, authenticationService) {
+        $rootScope.$on('$routeChangeError', function(ev, current, previous, rejection) {
+            console.log('unauthorized access');
+            $location.path('/');
+        });
+
         authenticationService.refreshCookie();
     }])
-    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
-    /*.value('user', function(identityService) {
-        return identityService.getCurrentUser();
-    })*/;
+    /*.provider('routeResolversProvider', [function routeResolversProvider() {
+        var routeChecks = {
+            isAuthenticated: ['$q', 'authenticationService', function($q, authenticationService) {
+                if (authenticationService.isAuthenticated) {
+                    return $q.when(true);
+                }
+
+                return $q.reject('Unauthorized user access');
+            }],
+            /!*isAdmin: ['$q', '$rootScope', 'authenticationService', function($q, $rootScope, authenticationService) {
+             if ($rootScope.isAdmin) {
+             return $q.when(true);
+             }
+
+             return $q.reject('Unauthorized user access');
+             }]*!/
+        };
+
+        return {
+            $get: function() {
+                return routeChecks;
+            }
+        }
+    }])*/
+    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');

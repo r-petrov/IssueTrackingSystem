@@ -4,14 +4,20 @@
 angular.module('issueTrackingSystem.projects.projectsController',
     ['ngRoute', 'issueTrackingSystem.users.identityService', 'issueTrackingSystem.projects.projectsService'])
     .config(['$routeProvider', function($routeProvider) {
+        var routeChecks = {
+            isAuthenticated: ['$q', 'authenticationService', function($q, authenticationService) {
+                if (authenticationService.isAuthenticated()) {
+                    return $q.when(true);
+                }
+
+                return $q.reject('Unauthorized Access');
+            }]
+        };
+
         $routeProvider.when('/projects', {
             templateUrl: 'app/projects/projects.html',
             controller: 'ProjectsController',
-            resolve: {
-                loggedInUser: function(identityService) {
-                    return identityService.getCurrentUser();
-                }
-            }
+            resolve: routeChecks.isAuthenticated
         });
 
     }])

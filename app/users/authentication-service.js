@@ -20,7 +20,6 @@ angular.module('issueTrackingSystem.users.authenticationService', [])
                     .then(function (success) {
                         loginUser(user)
                             .then(function(loggedInUser) {
-                                //sessionStorage.token = token;
                                 deferred.resolve(loggedInUser);
                             },
                             function(error) {

@@ -2,16 +2,24 @@
  * Created by PC on 16.04.2016 г..
  */
 angular.module('issueTrackingSystem.dashboard.dashboardController', ['ngRoute', 'issueTrackingSystem.dashboard.dashboardIssuesService'])
-    .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/dashboard', {
-            templateUrl: 'app/dashboard/dashboard.html',
-            controller: 'DashboardController',
-            resolve: {
-                loggedInUser: function(identityService) {
-                    return identityService.getCurrentUser();
-                }
-            }
-        });
+    .config([
+        '$routeProvider',
+        function($routeProvider) {
+            var routeChecks = {
+                isAuthenticated: ['$q', 'authenticationService', function($q, authenticationService) {
+                    if (authenticationService.isAuthenticated()) {
+                        return $q.when(true);
+                    }
+
+                    return $q.reject('Unauthorized Access');
+                }]
+            };
+
+            $routeProvider.when('/dashboard', {
+                templateUrl: 'app/dashboard/dashboard.html',
+                controller: 'DashboardController',
+                resolve: routeChecks.isAuthenticated
+            });
     }])
     .controller('DashboardController', [
         '$scope',

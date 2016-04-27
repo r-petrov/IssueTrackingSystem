@@ -1,16 +1,22 @@
 /**
  * Created by PC on 19.04.2016 г..
  */
-angular.module('issueTrackingSystem.changePassword.changePasswordController', [])
+angular.module('issueTrackingSystem.changePassword.changePasswordController', ['ngRoute', 'issueTrackingSystem.changePassword.changePasswordService'])
     .config(['$routeProvider', function($routeProvider) {
+        var routeChecks = {
+            isAuthenticated: ['$q', 'authenticationService', function($q, authenticationService) {
+                if (authenticationService.isAuthenticated()) {
+                    return $q.when(true);
+                }
+
+                return $q.reject('Unauthorized Access');
+            }]
+        };
+
         $routeProvider.when('/profile/password', {
             templateUrl: 'app/change-password/change-password.html',
             controller: 'ChangePasswordController',
-            resolve: {
-                loggedInUser: function(identityService) {
-                    return identityService.getCurrentUser();
-                }
-            }
+            resolve: routeChecks.isAuthenticated
         })
     }])
     .controller('ChangePasswordController', [

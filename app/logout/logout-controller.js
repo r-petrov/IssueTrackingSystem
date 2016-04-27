@@ -6,14 +6,20 @@ angular.module('issueTrackingSystem.logout', [
         'issueTrackingSystem.users.authenticationService'
     ])
     .config(['$routeProvider', function($routeProvider) {
+        var routeChecks = {
+            isAuthenticated: ['$q', 'authenticationService', function($q, authenticationService) {
+                if (authenticationService.isAuthenticated()) {
+                    return $q.when(true);
+                }
+
+                return $q.reject('Unauthorized Access');
+            }]
+        };
+
         $routeProvider.when('/logout', {
             templateUrl: 'app/logout/logout.html',
             controller: 'LogoutController',
-            resolve: {
-                loggedInUser: function(identityService) {
-                    return identityService.getCurrentUser();
-                }
-            }
+            resolve: routeChecks.isAuthenticated
         });
     }])
     .controller('LogoutController', ['$scope', '$rootScope', '$location', '$window', 'authenticationService',

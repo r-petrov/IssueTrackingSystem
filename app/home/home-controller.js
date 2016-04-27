@@ -24,8 +24,8 @@ angular.module('issueTrackingSystem.home', [
             $scope.login = function (user) {
                 authenticationService.loginUser(user)
                     .then(function(loggedInUser) {
-                        $location.path('/dashboard');
                         authenticationService.refreshCookie();
+                        $location.path('/dashboard');
                     },
                     function(error) {
                         console.log('You entered incorrect email or password!');
@@ -35,8 +35,8 @@ angular.module('issueTrackingSystem.home', [
             $scope.register = function (user) {
                 authenticationService.registerUser(user)
                     .then(function(loggedInUser) {
-                        $location.path('/dashboard');
                         authenticationService.refreshCookie();
+                        $location.path('/dashboard');
                     },
                     function(error) {
                         console.log(error);
