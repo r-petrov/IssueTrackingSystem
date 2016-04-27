@@ -11,28 +11,41 @@ angular.module('issueTrackingSystem.addProject.addProjectService', [])
                 return inputList.split(/,\s*/);
             }
 
-            function addCollectionToRequestBody(obj, collection) {
-                for(var key in collection) {
-                    var item = collection[key];
-                    obj[item] = item;
+            function createObjectsCollection(collection) {
+                var i,
+                    objectsCollection = [],
+                    length = collection.length;
+                for (i = 0; i < length; i++) {
+                    var currentItem = collection[i],
+                        currentObject = {
+                            'Name': currentItem
+                        };
+
+                    objectsCollection.push(currentObject);
                 }
+
+                return objectsCollection;
             }
 
             function createAddProjectRequestBody(project, labels, priorities) {
-                var transitionSchemeId = '',
+                var //transitionSchemeId = '',
                     requestBody = {
-                    Name: project.Name,
-                    Description: project.Description,
-                    ProjectKey: project.ProjectKey,
+                        'Name': project.Name,
+                        'Description': project.Description,
+                        'ProjectKey': project.ProjectKey,
+                        /*'Labels': labels,
+                        'Priorities': priorities,
+                        'LeadId': project.LeadId*/
                 };
 
-                addCollectionToRequestBody(requestBody, labels);
-                addCollectionToRequestBody(requestBody, priorities);
-
+                requestBody.Labels = createObjectsCollection(labels);
+                requestBody.Priorities = createObjectsCollection(priorities);
                 requestBody.LeadId = project.LeadId;
-                requestBody[transitionSchemeId] = '';
-                console.log(requestBody);
-                console.log(Object.keys(requestBody));
+
+                //requestBody.LeadId = project.LeadId;
+                //requestBody[transitionSchemeId] = '';
+                //console.log(requestBody);
+                //console.log(Object.keys(requestBody));
 
                 return requestBody;
             }
@@ -46,7 +59,6 @@ angular.module('issueTrackingSystem.addProject.addProjectService', [])
 
                 $http.post(addProjectUrl, requestBody)
                     .then(function(addedProject) {
-                        console.log('added project: ' + addedProject);
                         deferred.resolve(addedProject);
                     },
                     function(error) {

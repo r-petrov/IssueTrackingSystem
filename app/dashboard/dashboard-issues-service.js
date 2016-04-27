@@ -37,7 +37,7 @@ angular.module('issueTrackingSystem.dashboard.dashboardIssuesService', [])
                                 }
 
                                 previousIssue = currentIssue;
-                                if (i=== issues.length - 1) {
+                                if (i === issues.length - 1) {
                                     projectIssues.sort(function(a, b) {
                                         return new Date(b.DueDate) - new Date(a.DueDate);
                                     });

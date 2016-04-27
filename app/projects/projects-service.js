@@ -14,6 +14,7 @@ angular.module('issueTrackingSystem.projects.projectsService', [])
 
                 $http.get(projectsUrl)
                     .then(function(projects) {
+                        //console.log(projects);
                         deferred.resolve(projects);
                     },
                     function(error) {

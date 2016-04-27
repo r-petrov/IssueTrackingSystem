@@ -27,7 +27,7 @@ angular.module('issueTrackingSystem.addProject.addProjectController', ['ngRoute'
                 addProjectService.addProject(project)
                     .then(function(addedProject) {
                         console.log(addedProject);
-                        $window.history.back();
+                        $scope.back();
                     },
                     function(error) {
                         console.log(error);
