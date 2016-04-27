@@ -23,11 +23,13 @@ angular.module('issueTrackingSystem.changePassword.changePasswordController', ['
         '$scope',
         '$window',
         'changePasswordService',
-        function ChangePasswordController($scope, $window, changePasswordService) {
+        'toastr',
+        function ChangePasswordController($scope, $window, changePasswordService, toastr) {
             $scope.changePassword = function(passwordData) {
                 changePasswordService.changePassword(passwordData)
                     .then(function(success) {
                         $window.history.back();
+                        toastr.success('You successfully changed your password!');
                     })
             }
         }]);

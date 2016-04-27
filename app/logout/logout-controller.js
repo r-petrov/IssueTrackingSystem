@@ -22,11 +22,18 @@ angular.module('issueTrackingSystem.logout', [
             resolve: routeChecks.isAuthenticated
         });
     }])
-    .controller('LogoutController', ['$scope', '$rootScope', '$location', '$window', 'authenticationService',
-        function LogoutController($scope, $rootScope, $location,  $window, authenticationService) {
+    .controller('LogoutController', [
+        '$scope',
+        '$rootScope',
+        '$location',
+        '$window',
+        'authenticationService',
+        'toastr',
+        function LogoutController($scope, $rootScope, $location,  $window, authenticationService, toastr) {
             $scope.logout = function(currentUser) {
                 authenticationService.logout(currentUser)
                     .then(function(success) {
+                        toastr.success('You successfully logged out!');
                         $location.path('/');
                         //$window.location.href = '#/';
                         $window.location.reload();

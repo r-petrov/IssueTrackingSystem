@@ -16,7 +16,8 @@ angular.module('issueTrackingSystem.home', [
         '$scope',
         '$location',
         'authenticationService',
-        function HomeController($scope, $location, authenticationService) {
+        'toastr',
+        function HomeController($scope, $location, authenticationService, toastr) {
             if (authenticationService.isAuthenticated()) {
                 $location.path('/dashboard');
             }
@@ -26,6 +27,7 @@ angular.module('issueTrackingSystem.home', [
                     .then(function(loggedInUser) {
                         authenticationService.refreshCookie();
                         $location.path('/dashboard');
+                        toastr.success('You successfully logged in Issue Tracking System!');
                     },
                     function(error) {
                         console.log(error);
@@ -37,6 +39,7 @@ angular.module('issueTrackingSystem.home', [
                     .then(function(loggedInUser) {
                         authenticationService.refreshCookie();
                         $location.path('/dashboard');
+                        toastr.success('You successfully registered in Issue Tracking System!')
                     },
                     function(error) {
                         console.log(error);
