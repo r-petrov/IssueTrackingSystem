@@ -25,7 +25,7 @@
             </h2>
         </header>
 
-        <div ng-if="isAuthenticated" class="index-buttons">
+        <div ng-if="isAuthenticated" class="flex-elements">
             <div ng-if="isAdmin">
                 <button class="btn btn-primary button"><a href="#/dashboard">Dashboard</a></button>
                 <button class="btn btn-primary button"><a href="#/projects">Projects</a></button>
@@ -66,6 +66,7 @@
         <script src="app/common/get-users-service.js"></script>
         <script src="app/project/project-controller.js"></script>
         <script src="app/project/project-service.js"></script>
+        <script src="app/project/project-issues-service.js"></script>
         <script src="app/logout/logout-controller.js"></script>
     </div>
 </body>

@@ -1,6 +1,63 @@
-<div>
-Test
+<header>
+    <h3>
+        Project Page
+    </h3>
+</header>
+<div class="jumbotron flex-elements">
+    <div class="col-md-6">
+        <div ng-if="isAdmin || currentUser.Id === project.Lead.Id">
+            {{project.ProjectKey}}
+            <button class="btn btn-primary button">
+                Edit
+            </button>
+            <button class="btn btn-primary button">
+                Add Issue
+            </button>
+        </div>
+        <divl>
+            Project Key:
+            {{project.ProjectKey}}
+        </divl>
+        <div>
+            <span class="bold">Name</span>
+            <input type="text" value="{{project.Name}}" readonly="readonly">
+        </div>
+        <div>
+            <span class="bold">Description</span>
+            <input value="{{project.Description}}" readonly="readonly" />
+        </div>
+        <div>
+            <span class="bold">LeadId</span> ({{project.Lead.Id}})
+            <input type="text" value="{{project.Lead.Username}}" readonly="readonly">
+        </div>
+        <div>
+            Labels: <span ng-repeat="label in project.Labels">{{label.Name}}, </span>
+        </div>
+        <div>
+            Priorities: <span ng-repeat="priority in project.Priorities">{{priority.Name}}, </span>
+        </div>
+    </div>
+    <div class="table table-striped col-md-6 fixed">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>Assignee</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="currentIssue in issues">
+                    <td><a href="#/issues/:currentIssue.Id">{{currentIssue.Title}}</a></td>
+                    <td>{{currentIssue.Description}}</td>
+                    <td>{{currentIssue.DueDate}}</td>
+                    <td>{{currentIssue.Assignee.Username}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div>
 
-</div>
+
+<!-- todo make pagination -->

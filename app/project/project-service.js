@@ -13,7 +13,6 @@ angular.module('issueTrackingSystem.project.projectService', [])
 
                 $http.get(projectUrl)
                     .then(function(project) {
-                        console.log(project);
                         deferred.resolve(project);
                     },
                     function(error) {

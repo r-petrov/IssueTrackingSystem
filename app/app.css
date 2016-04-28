@@ -18,6 +18,7 @@ table th, td {
     width: 20%;
     height: 100%;
     vertical-align: middle;
+    table-layout: fixed;
 }
 
 label {
@@ -28,7 +29,7 @@ label {
     margin-left: auto;
 }
 
-.index-buttons {
+.flex-elements {
     display: flex;
     justify-content: space-between;
 }
@@ -67,3 +68,13 @@ label {
     font: italic bold 1.4em sans-serif;
     vertical-align: middle;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+/*
+.fixed {
+    table-layout: fixed;
+}
+*/

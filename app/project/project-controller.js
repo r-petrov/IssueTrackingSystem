@@ -23,12 +23,23 @@ angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'iss
         '$scope',
         '$routeParams',
         'projectService',
-        function ProjectController($scope, $routeParams, projectService) {
+        'projectIssuesService',
+        function ProjectController($scope, $routeParams, projectService, projectIssuesService) {
             var projectId = $routeParams.Id;
-            console.log(projectId);
             projectService.getProjectById(projectId)
                 .then(function(project) {
                     console.log(project);
+                    $scope.project = project.data;
+                },
+                function(error) {
+                    console.log(error);
+                });
+
+            projectIssuesService.getProjectIssues(projectId)
+                .then(function(projectIssues) {
+                    console.log('projectIssues:');
+                    console.log(projectIssues);
+                    $scope.issues = projectIssues.data.Issues;
                 },
                 function(error) {
                     console.log(error);
