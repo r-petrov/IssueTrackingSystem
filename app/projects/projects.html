@@ -13,7 +13,9 @@
             <tr ng-repeat="project in projects">
                 <td>
                     {{project.Name}}
-                    <button class="btn btn-primary button" href="#/projects/:Id">View</button>
+                    <button class="btn btn-primary button">
+                        <a href="#/projects/{{project.Id}}">View</a>
+                    </button>
                 </td>
             </tr>
         </tbody>

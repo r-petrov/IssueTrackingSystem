@@ -31,7 +31,6 @@ angular.module('issueTrackingSystem.users.identityService', [])
 
                 $http.get(BASE_URL + 'Users/me')
                     .then(function (loggedInUser) {
-                        console.log(loggedInUser);
                             currentUser = loggedInUser;
                             deferred.resolve(currentUser);
                             userProfileDeferred.resolve();

@@ -23,10 +23,11 @@ angular.module('issueTrackingSystem.projects.projectsController',
     }])
     .controller('ProjectsController', [
         '$scope',
+        '$location',
         'projectsService',
-        function($scope, projectsService) {
+        function ProjectsController($scope, $location, projectsService) {
             projectsService.getProjects()
                 .then(function(projects) {
                     $scope.projects = projects.data;
-                })
+                });
         }]);
