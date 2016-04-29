@@ -19,7 +19,7 @@
         </label>
         <label for="project-lead-id" >
             LeadId:
-            <select ng-readonly="!isAdmin" ng-model="project.LeadId" id="project-lead-id" required="required">
+            <select ng-if="isAdmin" ng-model="project.LeadId" id="project-lead-id" required="required">
                 <option ng-repeat="user in users" value="{{user.Id}}">
                     {{user.Username}}
                 </option>
@@ -27,11 +27,11 @@
         </label>
         <label for="project-labels">
             Labels (comma separated)
-            <input ng-model="project.LabelsString" id="project-labels" type="text" value="{{project.LabelsString}}">
+            <input ng-model="project.Labels" id="project-labels" type="text" value="{{project.Labels}}">
         </label>
         <label for="project-priorities">
             Priorities (comma separated)
-            <input ng-model="project.PrioritiesString" id="project-priorities" type="text" value="{{project.PrioritiesString}}">
+            <input ng-model="project.Priorities" id="project-priorities" type="text" value="{{project.Priorities}}">
         </label>
         <button ng-click="editProject(project)" class="btn btn-primary button" type="submit">
             Edit Project

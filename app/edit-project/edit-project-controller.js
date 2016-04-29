@@ -23,12 +23,24 @@ angular.module('issueTrackingSystem.editProject.editProjectController', ['ngRout
         '$scope',
         '$routeParams',
         'getProjectByIdService',
-        function EditProjectController($scope, $routeParams, getProjectByIdService) {
+        'editProjectService',
+        function EditProjectController($scope, $routeParams, getProjectByIdService, editProjectService) {
             var projectId = $routeParams.Id;
 
             getProjectByIdService.getProjectById(projectId)
                 .then(function(project) {
-                    console.log(project);
-                    $scope.project = project.data
+                    $scope.project = project.data;
+                    $scope.editProject = function(project) {
+                        console.log(project);
+
+                        editProjectService.editProject(projectId, project)
+                            .then(function(success) {
+                                console.log(success);
+                                $scope.back();
+                            },
+                            function(error) {
+                                console.log(error);
+                            })
+                    }
                 })
         }]);

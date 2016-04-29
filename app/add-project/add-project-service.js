@@ -8,44 +8,11 @@ angular.module('issueTrackingSystem.addProject.addProjectService', [])
         'BASE_URL',
         'createProjectRequestBodyService',
         function addProjectService($http, $q, BASE_URL, createProjectRequestBodyService) {
-            /*function processInputLists(inputList) {
-                return inputList.split(/,\s*!/);
-            }
-
-            function createObjectsCollection(collection) {
-                var i,
-                    objectsCollection = [],
-                    length = collection.length;
-                for (i = 0; i < length; i++) {
-                    var currentItem = collection[i],
-                        currentObject = {
-                            'Name': currentItem
-                        };
-
-                    objectsCollection.push(currentObject);
-                }
-
-                return objectsCollection;
-            }
-
-            function createAddProjectRequestBody(project, labels, priorities) {
-                var requestBody = {
-                        'Name': project.Name,
-                        'Description': project.Description,
-                        'ProjectKey': project.ProjectKey,
-                };
-
-                requestBody.Labels = createObjectsCollection(labels);
-                requestBody.Priorities = createObjectsCollection(priorities);
-                requestBody.LeadId = project.LeadId;
-
-                return requestBody;
-            }*/
 
             function addProject(project) {
                 var deferred = $q.defer(),
                     addProjectUrl = BASE_URL + 'projects',
-                    requestBody = createProjectRequestBodyService(project);
+                    requestBody = createProjectRequestBodyService.createProjectRequestBody(project);
 
                 $http.post(addProjectUrl, requestBody)
                     .then(function(addedProject) {
