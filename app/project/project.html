@@ -7,17 +7,17 @@
     <div class="col-md-6">
         <div ng-if="isAdmin || currentUser.Id === project.Lead.Id">
             {{project.ProjectKey}}
-            <button class="btn btn-primary button">
-                Edit
+            <button  class="btn btn-primary button">
+                <a href="#/projects/{{project.Id}}/edit">Edit</a>
             </button>
             <button class="btn btn-primary button">
                 Add Issue
             </button>
         </div>
-        <divl>
+        <div>
             Project Key:
             {{project.ProjectKey}}
-        </divl>
+        </div>
         <div>
             <span class="bold">Name</span>
             <input type="text" value="{{project.Name}}" readonly="readonly">

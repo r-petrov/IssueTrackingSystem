@@ -1,7 +1,7 @@
 /**
  * Created by PC on 27.04.2016 г..
  */
-angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'issueTrackingSystem.project.projectService'])
+angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'issueTrackingSystem.common.getProjectByIdService', 'issueTrackingSystem.project.projectIssuesService'])
     .config(['$routeProvider', function($routeProvider) {
         var routeChecks = {
             isAuthenticated: ['$q', 'authenticationService', function($q, authenticationService) {
@@ -22,7 +22,7 @@ angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'iss
     .controller('ProjectController', [
         '$scope',
         '$routeParams',
-        'projectService',
+        'getProjectByIdService',
         'projectIssuesService',
         function ProjectController($scope, $routeParams, projectService, projectIssuesService) {
             var projectId = $routeParams.Id;
@@ -44,4 +44,5 @@ angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'iss
                 function(error) {
                     console.log(error);
                 });
+
         }]);

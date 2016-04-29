@@ -1,0 +1,40 @@
+<div ng-controller="GetUsersController">
+    <header>
+        <h3>
+            Edit Project
+        </h3>
+    </header>
+    <form name="editProjectForm">
+        <label for="project-key">
+            Project key:
+            <input id="project-key" type="text" value="{{project.ProjectKey}}" readonly="readonly" />
+        </label>
+        <label for="project-name">
+            Name:
+            <input ng-model="project.Name" id="project-name" type="text" value="{{project.Name}}" required="required" />
+        </label>
+        <label for="project-description">
+            Description:
+            <input ng-model="project.Description" id="project-description" type="text" value="{{project.Description}}" required="required" />
+        </label>
+        <label for="project-lead-id" >
+            LeadId:
+            <select ng-readonly="!isAdmin" ng-model="project.LeadId" id="project-lead-id" required="required">
+                <option ng-repeat="user in users" value="{{user.Id}}">
+                    {{user.Username}}
+                </option>
+            </select>
+        </label>
+        <label for="project-labels">
+            Labels (comma separated)
+            <input ng-model="project.LabelsString" id="project-labels" type="text" value="{{project.LabelsString}}">
+        </label>
+        <label for="project-priorities">
+            Priorities (comma separated)
+            <input ng-model="project.PrioritiesString" id="project-priorities" type="text" value="{{project.PrioritiesString}}">
+        </label>
+        <button ng-click="editProject(project)" class="btn btn-primary button" type="submit">
+            Edit Project
+        </button>
+    </form>
+</div>

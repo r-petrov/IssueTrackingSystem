@@ -8,7 +8,7 @@
         <label for="name">
             Name
         </label>
-        <input ng-model="project.Name" id="name" type="text" required="required" placeholder="Project Name">
+        <input ng-model="project.Name" id="name" type="text" required="required" placeholder="Project Name" />
         <label for="description">
             Description
         </label>
@@ -17,22 +17,24 @@
             Project Key
         </label>
         <input ng-model="project.ProjectKey" id="project-key" type="text" required="required" placeholder="Project Key">
-        <label for="leadId">
+        <label for="lead-id">
             LeadId
         </label>
-        <select ng-model="project.LeadId" id="leadId" type="text" required="required">
+        <select ng-model="project.LeadId" id="lead-id" required="required">
             <option ng-repeat="user in users" value="{{user.Id}}" >{{user.Username}}</option>
         </select>
         <label for="priorities">
             Priorities (comma separated)
         </label>
-        <input ng-model="project.Priorities" id="priorities" type="text" required="required" placeholder="Priorities">
+        <input ng-model="project.Priorities" id="priorities" type="text" required="required" placeholder="Priorities" />
         <label for="labels">
             Labels (comma separated)
         </label>
-        <input ng-model="project.Labels" id="labels" type="text" placeholder="Labels">
+        <input ng-model="project.Labels" id="labels" type="text" placeholder="Labels" />
     </form>
     <button ng-disabled="addProjectForm.$invalid || addProjectForm.$pending" ng-click="addProject(project)" class="btn btn-primary button" type="submit">
         Add Project
     </button>
 </div>
+
+<!--todo make a modal dialog-->
