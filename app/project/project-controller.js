@@ -24,11 +24,10 @@ angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'iss
         '$routeParams',
         'getProjectByIdService',
         'projectIssuesService',
-        function ProjectController($scope, $routeParams, projectService, projectIssuesService) {
+        function ProjectController($scope, $routeParams, getProjectByIdService, projectIssuesService) {
             var projectId = $routeParams.Id;
-            projectService.getProjectById(projectId)
+            getProjectByIdService.getProjectById(projectId)
                 .then(function(project) {
-                    console.log(project);
                     $scope.project = project.data;
                 },
                 function(error) {
@@ -37,8 +36,6 @@ angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'iss
 
             projectIssuesService.getProjectIssues(projectId)
                 .then(function(projectIssues) {
-                    console.log('projectIssues:');
-                    console.log(projectIssues);
                     $scope.issues = projectIssues.data.Issues;
                 },
                 function(error) {

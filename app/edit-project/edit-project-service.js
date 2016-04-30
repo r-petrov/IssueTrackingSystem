@@ -11,14 +11,14 @@ angular.module('issueTrackingSystem.editProject.editProjectService', [])
             function editProject(projectId, project) {
                 var deferred = $q.defer(),
                     editProjectUrl = BASE_URL + 'Projects/' + projectId,
-                    requestBody = createProjectRequestBodyService.createProjectRequestBody(project);
-                    delete requestBody.ProjectKey;
-                console.log(requestBody);
+                    requestBody;
+
+                requestBody = createProjectRequestBodyService.createProjectRequestBody(project);
+                delete requestBody.ProjectKey;
 
                 $http.put(editProjectUrl, requestBody)
-                    .then(function(success) {
-                        deferred.resolve();
-                        console.log(success);
+                    .then(function(editedProject) {
+                        deferred.resolve(editedProject);
                     },
                     function(error) {
                         deferred.reject(error);

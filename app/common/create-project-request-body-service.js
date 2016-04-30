@@ -18,18 +18,23 @@ angular.module('issueTrackingSystem.common.createProjectRequestBodyService', [])
                 length = collection.length;
             for (i = 0; i < length; i++) {
                 var currentItem = collection[i],
+                    currentObject = {};
+
+                if (currentItem && currentItem !== '') {
                     currentObject = {
                         'Name': currentItem
                     };
 
-                objectsCollection.push(currentObject);
+                    objectsCollection.push(currentObject);
+                }
+
             }
 
             return objectsCollection;
         }
 
         function createProjectRequestBody(project) {
-            var priorities = processInputLists(project.Priorities.toString()),
+            var priorities = project.Priorities,
                 labels = project.Labels,
                 requestBody = {
                 'Name': project.Name,
@@ -37,13 +42,18 @@ angular.module('issueTrackingSystem.common.createProjectRequestBodyService', [])
                 'ProjectKey': project.ProjectKey,
             };
 
+            if (priorities) {
+                priorities = processInputLists(priorities.toString());
+                requestBody.Priorities = createObjectsCollection(priorities);
+            }
+
             if (labels) {
                 labels = processInputLists(labels.toString());
                 requestBody.Labels = createObjectsCollection(labels);
             }
 
-            requestBody.Priorities = createObjectsCollection(priorities);
             requestBody.LeadId = project.LeadId;
+            console.log(requestBody);
 
             return requestBody;
         }
