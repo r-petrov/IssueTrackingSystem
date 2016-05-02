@@ -2,7 +2,7 @@
  * Created by PC on 22.04.2016 г..
  */
 angular.module('issueTrackingSystem.projects.projectsController',
-    ['ngRoute', 'issueTrackingSystem.users.identityService', 'issueTrackingSystem.projects.projectsService'])
+    ['ngRoute', 'issueTrackingSystem.users.identityService', 'issueTrackingSystem.common.getProjectsService'])
     .config(['$routeProvider', function($routeProvider) {
         var routeChecks = {
             isAuthenticated: ['$q', 'authenticationService', function($q, authenticationService) {
@@ -23,10 +23,9 @@ angular.module('issueTrackingSystem.projects.projectsController',
     }])
     .controller('ProjectsController', [
         '$scope',
-        '$location',
-        'projectsService',
-        function ProjectsController($scope, $location, projectsService) {
-            projectsService.getProjects()
+        'getProjectsService',
+        function ProjectsController($scope, getProjectsService) {
+            getProjectsService.getProjects()
                 .then(function(projects) {
                     $scope.projects = projects.data;
                 });

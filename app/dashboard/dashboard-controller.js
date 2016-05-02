@@ -30,8 +30,10 @@ angular.module('issueTrackingSystem.dashboard.dashboardController', ['ngRoute', 
                     $scope.issues = [];
                     for (var key in issuesByProjects) {
                         var currentIssues = issuesByProjects[key],
+                            currentProjectId = currentIssues[0].Project.Id,
                             currentProjectName = currentIssues[0].Project.Name,
                             currentIssuesByProject = {
+                                projectId: currentProjectId,
                                 projectName: currentProjectName,
                                 issuesByProject: currentIssues
                             };

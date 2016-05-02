@@ -24,13 +24,18 @@ angular.module('issueTrackingSystem.addProject.addProjectController', ['ngRoute'
         'addProjectService',
         function AddProjectController($scope, addProjectService) {
             $scope.addProject = function(project) {
-                addProjectService.addProject(project)
-                    .then(function(addedProject) {
-                        console.log(addedProject);
-                        $scope.back();
-                    },
-                    function(error) {
-                        console.log(error);
-                    })
+                console.log(project);
+                if (project.Name && project.Description && project.ProjectKey && project.LeadId && project.Priorities) {
+                    addProjectService.addProject(project)
+                        .then(function(addedProject) {
+                                $scope.back();
+                            },
+                            function(error) {
+                                console.log(error);
+                            })
+                }
+                else {
+                    toastr.error('Project Name, Project Description, Project Key and Project LeadId are mandatory fields!');
+                }
             }
         }]);

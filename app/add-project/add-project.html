@@ -12,11 +12,11 @@
         <label for="description">
             Description
         </label>
-        <textarea ng-model="project.Description" id="description" required="required" placeholder="Description"></textarea>
+        <textarea ng-model="project.Description" id="description" required="required" placeholder="Project Description" />
         <label for="project-key">
             Project Key
         </label>
-        <input ng-model="project.ProjectKey" id="project-key" type="text" required="required" placeholder="Project Key">
+        <input ng-model="project.ProjectKey" id="project-key" type="text" required="required" placeholder="Project Key" />
         <label for="lead-id">
             LeadId
         </label>
@@ -26,15 +26,16 @@
         <label for="priorities">
             Priorities (comma separated)
         </label>
-        <input ng-model="project.Priorities" id="priorities" type="text" placeholder="Priorities" />
+        <input ng-model="project.Priorities" id="priorities" type="text" placeholder="Project Priorities" required="required" />
         <label for="labels">
             Labels (comma separated)
         </label>
-        <input ng-model="project.Labels" id="labels" type="text" placeholder="Labels" />
+        <input ng-model="project.Labels" id="labels" type="text" placeholder="Project Labels" />
     </form>
-    <button ng-disabled="addProjectForm.$invalid || addProjectForm.$pending" ng-click="addProject(project)" class="btn btn-primary button" type="submit">
+    <button ng-click="addProject(project)" class="btn btn-primary button" type="submit">
         Add Project
     </button>
 </div>
 
 <!--todo make a modal dialog-->
+<!--todo make a input autocomplete -->

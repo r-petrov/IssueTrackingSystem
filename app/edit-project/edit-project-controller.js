@@ -34,7 +34,7 @@ angular.module('issueTrackingSystem.editProject.editProjectController', ['ngRout
                     $scope.project = project.data;
 
                     $scope.editProject = function(project) {
-                        if (project.Name && project.Description && project.LeadId) {
+                        if (project.Name && project.Description && project.LeadId && project.Priorities) {
                             editProjectService.editProject(projectId, project)
                                 .then(function(editedProject) {
                                         console.log(editedProject);

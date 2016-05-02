@@ -1,0 +1,18 @@
+<div ng-controller="GetUsersController" class="jumbotron">
+    <header>
+        <h3>
+            Add Issue
+        </h3>
+    </header>
+    <form name="addIssueForm" class="col-md-6 col-md-offset-2 border">
+        <label for="title">
+            <input ng-model="issue.Title" id="title" type="text"  required="required" placeholder="Issue Title"/>
+        </label>
+        <label for="description">
+            <input ng-model="issue.Description" id="description" type="text" required="required" placeholder="Issue Description" />
+        </label>
+        <label>
+            Project
+        </label>
+    </form>
+</div>

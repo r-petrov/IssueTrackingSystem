@@ -14,7 +14,7 @@
         <tbody>
             <tr ng-repeat="issue in issues">
                 <td class="project-name">
-                    {{issue.projectName}}
+                    <a href="#/projects/{{issue.projectId}}">{{issue.projectName}}</a>
                 </td>
                 <td>
                     <table class="table table-striped">
@@ -28,9 +28,13 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="currentIssue in issue.issuesByProject">
-                                <td><a href="#/issues/:currentIssue.Id">{{currentIssue.Title}}</a></td>
+                                <td>
+                                    <a href="#/issues/:currentIssue.Id">{{currentIssue.Title}}</a>
+                                </td>
                                 <td>{{currentIssue.Description}}</td>
-                                <td>{{currentIssue.Project.Name}}</td>
+                                <td>
+                                    <a href="#/projects/{{currentIssue.Project.Id}}">{{currentIssue.Project.Name}}</a>
+                                </td>
                                 <td>{{currentIssue.DueDate}}</td>
                             </tr>
                         </tbody>

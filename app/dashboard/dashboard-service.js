@@ -18,6 +18,7 @@ angular.module('issueTrackingSystem.dashboard.dashboardService', [])
                         },
                         function(error) {
                             console.log(error);
+                            deferred.reject(error);
                         });
 
                 return deferred.promise;

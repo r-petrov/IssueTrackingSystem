@@ -14,7 +14,7 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.logout',
         'issueTrackingSystem.changePassword.changePasswordController',
         'issueTrackingSystem.changePassword.changePasswordService',
-        'issueTrackingSystem.projects.projectsService',
+        'issueTrackingSystem.common.getProjectsService',
         'issueTrackingSystem.projects.projectsController',
         'issueTrackingSystem.addProject.addProjectController',
         'issueTrackingSystem.addProject.addProjectService',
@@ -27,6 +27,7 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.editProject.editProjectController',
         'issueTrackingSystem.editProject.editProjectService',
         'issueTrackingSystem.editProject.transformCollectionsService',
+        'issueTrackingSystem.addIssue.addIssueController',
     ])
     .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
         $httpProvider.interceptors.push(['$q', 'toastr', function($q, toastr) {
