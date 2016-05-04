@@ -15,6 +15,7 @@ angular.module('issueTrackingSystem.dashboard.dashboardService', [])
                 $http.get(assigneeUsersIssuesUrl)
                     .then(function(assigneeUsersIssues) {
                             deferred.resolve(assigneeUsersIssues);
+                        console.log(assigneeUsersIssues);
                         },
                         function(error) {
                             console.log(error);

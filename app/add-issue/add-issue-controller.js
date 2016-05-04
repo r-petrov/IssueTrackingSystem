@@ -24,7 +24,8 @@ angular.module('issueTrackingSystem.addIssue.addIssueController', ['ngRoute'])
         '$routeParams',
         'getProjectByIdService',
         'getProjectsService',
-        function AddIssueController($scope, $routeParams, getProjectByIdService, getProjectsService) {
+        'addIssueService',
+        function AddIssueController($scope, $routeParams, getProjectByIdService, getProjectsService, addIssueService) {
             var projectId = $routeParams.Id;
             getProjectByIdService.getProjectById(projectId)
                 .then(function(project) {
@@ -35,9 +36,34 @@ angular.module('issueTrackingSystem.addIssue.addIssueController', ['ngRoute'])
                     console.log(error);
                 });
 
-            getProjectsService.getProjects()
+            $scope.addIssue = function(issue) {
+                if (issue.Title && issue.Description && issue.DueDate && issue.AssigneeId && issue.PriorityId) {
+                    issue.ProjectId = projectId;
+                    console.log(issue);
+                    addIssueService.addIssue(issue)
+                        .then(function (issue) {
+                                console.log(issue);
+                                $scope.back();
+                            },
+                            function(error) {
+                                console.log(error);
+                            })
+                }
+                else {
+                    toastr.error('Issue Title, Description, DueDate, AssigneeId and PriorityId are mandatory fields!')
+                }
+            };
+
+            //$scope.labels = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
+
+            /*getProjectsService.getProjects()
                 .then(function(projects) {
-                    console.log(projects);
+                    var defaultProject = projects.data.filter(function(project) {
+                        return project.Id === projectId;
+                    });
+                    console.log(defaultProject);
+                    //console.log(projects);
                     $scope.projects = projects.data;
-                });
+                    console.log(projects.data);
+                });*/
         }]);

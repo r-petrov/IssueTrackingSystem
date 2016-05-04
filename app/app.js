@@ -6,6 +6,7 @@ angular.module('issueTrackingSystem', [
         'ngCookies',
         'issueTrackingSystem.common.mainController',
         'issueTrackingSystem.common.previousPageController',
+        'issueTrackingSystem.common.autoCompleteDirective',
         'issueTrackingSystem.home',
         'issueTrackingSystem.users.identityService',
         'issueTrackingSystem.dashboard.dashboardController',
@@ -23,11 +24,13 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.project.projectController',
         'issueTrackingSystem.common.getProjectByIdService',
         'issueTrackingSystem.common.createProjectRequestBodyService',
+        'issueTrackingSystem.common.createIssueRequestBodyService',
         'issueTrackingSystem.project.projectIssuesService',
         'issueTrackingSystem.editProject.editProjectController',
         'issueTrackingSystem.editProject.editProjectService',
         'issueTrackingSystem.editProject.transformCollectionsService',
         'issueTrackingSystem.addIssue.addIssueController',
+        'issueTrackingSystem.addIssue.addIssueService',
     ])
     .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
         $httpProvider.interceptors.push(['$q', 'toastr', function($q, toastr) {
