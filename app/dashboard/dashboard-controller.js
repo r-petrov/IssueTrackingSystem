@@ -1,7 +1,7 @@
 /**
  * Created by PC on 16.04.2016 г..
  */
-angular.module('issueTrackingSystem.dashboard.dashboardController', ['ngRoute', 'issueTrackingSystem.dashboard.dashboardIssuesService'])
+angular.module('issueTrackingSystem.dashboard.dashboardController', ['ngRoute', 'issueTrackingSystem.dashboard.dashboardIssuesService', 'issueTrackingSystem.dashboard.dashboardAssociatedProjectsService'])
     .config([
         '$routeProvider',
         function($routeProvider) {
@@ -24,7 +24,8 @@ angular.module('issueTrackingSystem.dashboard.dashboardController', ['ngRoute', 
     .controller('DashboardController', [
         '$scope',
         'dashboardIssuesService',
-        function DashboardController($scope, dashboardIssuesService) {
+        'dashboardAssociatedProjectsService',
+        function DashboardController($scope, dashboardIssuesService, dashboardAssociatedProjectsService) {
             dashboardIssuesService.getIssuesByProjects()
                 .then(function(issuesByProjects) {
                     $scope.issues = [];
@@ -43,4 +44,11 @@ angular.module('issueTrackingSystem.dashboard.dashboardController', ['ngRoute', 
                 function(error) {
                     console.log(error);
                 });
+
+            dashboardAssociatedProjectsService.getAssociatedProjects()
+                .then(function(associatedProjects) {
+                    var associatedUsersProjects = associatedProjects.data.Projects;
+                    console.log(associatedUsersProjects);
+                    $scope.associatedProjects = associatedUsersProjects;
+                })
         }]);

@@ -1,0 +1,42 @@
+/**
+ * Created by PC on 05.05.2016 г..
+ */
+angular.module('issueTrackingSystem.dashboard.dashboardAssociatedProjectsService', [])
+    .factory('dashboardAssociatedProjectsService', [
+        '$http',
+        '$q',
+        'BASE_URL',
+        'identityService',
+        function dashboardAssociatedProjectsService($http, $q, BASE_URL, identityService) {
+            function getAssociatedProjcets(pageSize) {
+                var associatedProjectsUrl,
+                    currentUserId,
+                    deferred = $q.defer(),
+                    currentPageSize = pageSize || 140;
+                     //BASE_URL + 'Issues/?pageSize=' + currentPageSize + '&pageNumber=1&filter={value}Project.LeadId=';
+
+                identityService.getCurrentUser()
+                    .then(function(currentUser) {
+                        currentUserId = currentUser.data.Id;
+                        console.log(currentUserId);
+                        associatedProjectsUrl = BASE_URL + 'projects?filter=Lead.Id=\"' + currentUserId + '\"&pageSize=' + currentPageSize + '&pageNumber=1';
+                        $http.get(associatedProjectsUrl)
+                            .then(function(associatedProjects) {
+                                deferred.resolve(associatedProjects);
+                                console.log(associatedProjects);
+                            },
+                            function(error) {
+                                deferred.reject(error);
+                            })
+                    },
+                    function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            }
+
+            return {
+                getAssociatedProjects: getAssociatedProjcets
+            }
+        }]);

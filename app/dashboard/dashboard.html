@@ -41,6 +41,11 @@
                     </table>
                 </td>
             </tr>
+            <tr ng-repeat="project in associatedProjects">
+                <td class="project-name">
+                    <a href="#/projects/{{project.Id}}">{{project.Name}}</a>
+                </td>
+            </tr>
         </tbody>
     </table>
 

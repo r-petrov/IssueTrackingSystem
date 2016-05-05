@@ -12,6 +12,7 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.dashboard.dashboardController',
         'issueTrackingSystem.dashboard.dashboardIssuesService',
         'issueTrackingSystem.dashboard.dashboardService',
+        'issueTrackingSystem.dashboard.dashboardAssociatedProjectsService',
         'issueTrackingSystem.logout',
         'issueTrackingSystem.changePassword.changePasswordController',
         'issueTrackingSystem.changePassword.changePasswordService',
