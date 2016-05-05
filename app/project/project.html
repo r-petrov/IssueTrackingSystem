@@ -1,13 +1,13 @@
 <header>
-    <h3>
+    <h3 class="header-styles">
         Project Page
     </h3>
 </header>
-<div class="jumbotron flex-elements">
+<div class="flex-elements">
     <div class="col-md-6">
         <div ng-if="isAdmin || currentUser.Id === project.Lead.Id">
             {{project.ProjectKey}}
-            <button  class="btn btn-primary button">
+            <button class="btn btn-primary button">
                 <a href="#/projects/{{project.Id}}/edit">Edit</a>
             </button>
             <button class="btn btn-primary button">
@@ -24,7 +24,7 @@
         </div>
         <div>
             <span class="bold">Description</span>
-            <input value="{{project.Description}}" readonly="readonly" />
+            <input type="text" value="{{project.Description}}" readonly="readonly" />
         </div>
         <div>
             <span class="bold">LeadId</span> ({{project.Lead.Id}})
@@ -49,7 +49,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="currentIssue in issues">
-                    <td><a href="#/issues/:currentIssue.Id">{{currentIssue.Title}}</a></td>
+                    <td><a href="#/issues/{{currentIssue.Id}}">{{currentIssue.Title}}</a></td>
                     <td>{{currentIssue.Description}}</td>
                     <td>{{currentIssue.DueDate}}</td>
                     <td>{{currentIssue.Assignee.Username}}</td>

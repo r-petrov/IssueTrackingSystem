@@ -1,0 +1,81 @@
+<div>
+    <header>
+        <h3 class="header-styles">
+            Issue Page
+        </h3>
+    </header>
+    <div>
+        {{issue.IssueKey}}
+        <span ng-if="isAdmin || currentUserId == issue.Author.Id">
+            <button class="btn btn-primary button">
+                Edit
+            </button>
+        </span>
+    </div>
+    <div class="flex-elements">
+        <div>
+            <div>
+                <span class="bold">Title</span>
+                <input type="text" value="{{issue.Title}}" readonly="readonly">
+            </div>
+            <div>
+                <span class="bold">Description</span>
+                <input type="text" value="{{issue.Description}}" readonly="readonly">
+            </div>
+            <div>
+                <span class="bold">AssigneeId (current id: {{issue.Assignee.Id}})</span>
+                <input type="text" value="{{issue.Assignee.Username}}" readonly="readonly">
+            </div>
+            <div>
+                <span class="bold">PriorityId</span>
+                <input type="text" value="{{issue.Priority.Id}}" readonly="readonly">
+            </div>
+            <div>
+                <span class="bold">DueDate</span>
+                <input type="text" value="{{issue.DueDate}}" readonly="readonly">
+            </div>
+            <div>
+                Author: {{issue.Author.Username}}
+            </div>
+            <div>
+                Project: {{issue.Project.Name}}
+            </div>
+            <div>
+                Status: {{issue.Status.Name}}
+            </div>
+            <div>
+                Labels: <span ng-repeat="label in issue.Labels">{{label.Name}}, </span>
+            </div>
+        </div>
+        <div>
+            <h5>
+                Available statuses:
+            </h5>
+            <ul ng-repeat="status in issue.AvailableStatuses">
+                <li ng-model="newStatus" value="{{status.Id}}">
+                    {{status.Name}}
+                    <span ng-if="isAdmin || currentUserId == issue.Author.Id || currentUserId == issue.Assignee.Id">
+                        <button ng-click="changeStatus(newStatus)" class="btn btn-primary button" type="submit">Change</button>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div ng-repeat="comment in comments" class="border">
+        <div class="header-styles">
+            {{comment.Author.Username}} - {{comment.CreatedOn}}
+        </div>
+        <div>
+            {{comment.Text}}
+        </div>
+    </div>
+    <div ng-if="currentUserId == issue.Author.Id || currentUserId == issue.Assignee.Id">
+        <h5 class="bold">
+            Text:
+        </h5>
+        <form name="addCommentForm">
+            <textarea ng-model="newComment" required="required" style="width: 100%"></textarea>
+            <button ng-disabled="addCommentForm.$invalid || addCommentForm.$pending" ng-click="addComment(newComment)" class="btn btn-primary button button-display" type="submit">Add Comment</button>
+        </form>
+    </div>
+</div>

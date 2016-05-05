@@ -18,12 +18,10 @@ angular.module('issueTrackingSystem.dashboard.dashboardAssociatedProjectsService
                 identityService.getCurrentUser()
                     .then(function(currentUser) {
                         currentUserId = currentUser.data.Id;
-                        console.log(currentUserId);
                         associatedProjectsUrl = BASE_URL + 'projects?filter=Lead.Id=\"' + currentUserId + '\"&pageSize=' + currentPageSize + '&pageNumber=1';
                         $http.get(associatedProjectsUrl)
                             .then(function(associatedProjects) {
                                 deferred.resolve(associatedProjects);
-                                console.log(associatedProjects);
                             },
                             function(error) {
                                 deferred.reject(error);

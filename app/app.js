@@ -9,6 +9,7 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.common.autoCompleteDirective',
         'issueTrackingSystem.home',
         'issueTrackingSystem.users.identityService',
+        'issueTrackingSystem.users.authenticationService',
         'issueTrackingSystem.dashboard.dashboardController',
         'issueTrackingSystem.dashboard.dashboardIssuesService',
         'issueTrackingSystem.dashboard.dashboardService',
@@ -32,6 +33,8 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.editProject.transformCollectionsService',
         'issueTrackingSystem.addIssue.addIssueController',
         'issueTrackingSystem.addIssue.addIssueService',
+        'issueTrackingSystem.issue.issueController',
+        'issueTrackingSystem.issue.issueService',
     ])
     .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
         $httpProvider.interceptors.push(['$q', 'toastr', function($q, toastr) {

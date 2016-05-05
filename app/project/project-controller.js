@@ -26,6 +26,7 @@ angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'iss
         'projectIssuesService',
         function ProjectController($scope, $routeParams, getProjectByIdService, projectIssuesService) {
             var projectId = $routeParams.Id;
+
             getProjectByIdService.getProjectById(projectId)
                 .then(function(project) {
                     $scope.project = project.data;

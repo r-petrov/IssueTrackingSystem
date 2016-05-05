@@ -29,7 +29,7 @@
                         <tbody>
                             <tr ng-repeat="currentIssue in issue.issuesByProject">
                                 <td>
-                                    <a href="#/issues/:currentIssue.Id">{{currentIssue.Title}}</a>
+                                    <a href="#/issues/{{currentIssue.Id}}">{{currentIssue.Title}}</a>
                                 </td>
                                 <td>{{currentIssue.Description}}</td>
                                 <td>

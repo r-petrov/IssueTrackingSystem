@@ -17,7 +17,6 @@ angular.module('issueTrackingSystem.dashboard.dashboardService', [])
                             deferred.resolve(assigneeUsersIssues);
                         },
                         function(error) {
-                            console.log(error);
                             deferred.reject(error);
                         });
 

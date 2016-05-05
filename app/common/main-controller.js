@@ -10,6 +10,8 @@ angular.module('issueTrackingSystem.common.mainController', [])
                 .then(function(currentUser) {
                     $rootScope.currentUser = currentUser;
                     console.log($rootScope.currentUser);
+                    $rootScope.currentUserId = currentUser.data.Id;
+                    console.log($rootScope.currentUserId);
                     $rootScope.isAdmin = currentUser.data.isAdmin;
                     console.log($rootScope.isAdmin);
                     $rootScope.isAuthenticated = true;

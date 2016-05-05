@@ -26,8 +26,8 @@
         </header>
 
         <div ng-if="isAuthenticated" class="flex-elements">
+            <button class="btn btn-primary button"><a href="#/dashboard">Dashboard</a></button>
             <div ng-if="isAdmin">
-                <button class="btn btn-primary button"><a href="#/dashboard">Dashboard</a></button>
                 <button class="btn btn-primary button"><a href="#/projects">Projects</a></button>
             </div>
             <div class="right">
@@ -76,6 +76,8 @@
         <script src="app/add-issue/add-issue-controller.js"></script>
         <script src="app/add-issue/add-issue-service.js"></script>
         <script src="app/common/create-issue-request-body-service.js"></script>
+        <script src="app/issue/issue-controller.js"></script>
+        <script src="app/issue/issue-service.js"></script>
         <script src="app/logout/logout-controller.js"></script>
     </div>
 </body>

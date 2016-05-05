@@ -76,6 +76,19 @@ label {
 .required {
     color: red;
 }
+
+.header-styles {
+    margin-bottom: 21px;
+    height: 45px;
+    line-height: 45px;
+    background-color: #ffffff;
+    font-weight: bold;
+}
+
+.button-display {
+    display: block;
+}
+
 /*
 .fixed {
     table-layout: fixed;
