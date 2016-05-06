@@ -51,11 +51,11 @@
             <h5>
                 Available statuses:
             </h5>
-            <ul ng-repeat="status in issue.AvailableStatuses">
-                <li ng-model="newStatus" value="{{status.Id}}">
+            <ul>
+                <li ng-repeat="status in issue.AvailableStatuses" value="{{status.Id}}">
                     {{status.Name}}
                     <span ng-if="isAdmin || currentUserId == issue.Author.Id || currentUserId == issue.Assignee.Id">
-                        <button ng-click="changeStatus(newStatus)" class="btn btn-primary button" type="submit">Change</button>
+                        <button ng-click="changeStatus(status.Id)" class="btn btn-primary button" type="submit">Change</button>
                     </span>
                 </li>
             </ul>

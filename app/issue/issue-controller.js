@@ -54,6 +54,18 @@ angular.module('issueTrackingSystem.issue.issueController', ['ngRoute', 'issueTr
                 else {
                     toastr.error('You should type a comment first!');
                 }
+            };
+
+            $scope.changeStatus = function(newStatus) {
+                console.log(newStatus);
+                issueService.changeStatus(issueId, newStatus)
+                    .then(function(newAvailableStatuses) {
+                        console.log(newAvailableStatuses);
+                        $route.reload();
+                    },
+                    function(error) {
+                        console.log(error);
+                    });
             }
         }
     ]);
