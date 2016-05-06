@@ -1,0 +1,47 @@
+<div ng-controller="GetUsersController">
+    <header>
+        <h3 class="header-styles">
+            Edit Issue Page
+        </h3>
+    </header>
+    <form name="editIssueForm">
+        <div>
+            <span class="bold">Issue key: {{issue.IssueKey}}</span>
+        </div>
+        <label for="title">
+            Title:
+            <input ng-model="issue.Title" id="title" type="text" value="{{issue.Title}}" required="required">
+        </label>
+        <label for="description">
+            Description:
+            <input ng-model="issue.Description" id="description" type="text" value="{{issue.Description}}" required="required">
+        </label>
+        <label for="due-date">
+            DueDate:
+            <input ng-model="issue.DueDate" datetime="yyyy-MM-dd" id="due-date" type="text" value="{{issue.DueDate}}" required="required">
+        </label>
+        <label for="assignee-id">
+            AssigneeId:
+            <select ng-model="issue.AssigneeId" id="assignee-id" required="required">
+                <option ng-repeat="user in users" value="{{user.Id}}">
+                    {{user.Username}}
+                </option>
+            </select>
+        </label>
+        <div>
+            <span class="bold">ProjectId: {{issue.Project.Id}}({{issue.Project.Name}})</span>
+        </div>
+        <label for="priority-id">
+            PriorityId:
+            <select ng-model="issue.PriorityId" name="priority-id" id="priority-id" required="required">
+                <option ng-repeat="priority in priorities" value="{{priority.Id}}">{{priority.Name}}</option>
+            </select>
+        </label>
+        <button ng-disabled="editIssueForm.$invalid || editIssueForm.$pending" ng-click="editIssue(issue)" class="btn btn-primary button" type="submit">
+            Edit Issue
+        </button>
+        <button class="btn btn-primary button" ng-click="back()">
+            Go Back
+        </button>
+    </form>
+</div>

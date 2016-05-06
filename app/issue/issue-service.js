@@ -7,7 +7,7 @@ angular.module('issueTrackingSystem.issue.issueService', [])
         '$q',
         'BASE_URL',
         function issueService($http, $q, BASE_URL) {
-            function getCurrentIssue(issueId) {
+            /*function getCurrentIssue(issueId) {
                 var deferred = $q.defer(),
                     getCurrentIssueUrl = BASE_URL + 'Issues/' + issueId;
 
@@ -20,7 +20,7 @@ angular.module('issueTrackingSystem.issue.issueService', [])
                     });
 
                 return deferred.promise;
-            }
+            }*/
 
             function getComments(issueId) {
                 var deferred = $q.defer(),
@@ -73,7 +73,7 @@ angular.module('issueTrackingSystem.issue.issueService', [])
             }
 
             return {
-                getCurrentIssue: getCurrentIssue,
+                //getCurrentIssue: getCurrentIssue,
                 getComments: getComments,
                 addComment: addComment,
                 changeStatus: changeStatus

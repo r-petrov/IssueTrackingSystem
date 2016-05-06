@@ -35,6 +35,9 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.addIssue.addIssueService',
         'issueTrackingSystem.issue.issueController',
         'issueTrackingSystem.issue.issueService',
+        'issueTrackingSystem.common.getIssueByIdService',
+        'issueTrackingSystem.editIssue.editIssueController',
+        'issueTrackingSystem.editIssue.editIssueService',
     ])
     .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
         $httpProvider.interceptors.push(['$q', 'toastr', function($q, toastr) {

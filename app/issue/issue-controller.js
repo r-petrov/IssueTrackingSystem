@@ -24,11 +24,12 @@ angular.module('issueTrackingSystem.issue.issueController', ['ngRoute', 'issueTr
         '$scope',
         '$routeParams',
         '$route',
+        'getIssueByIdService',
         'issueService',
-        function IssueController($scope, $routeParams, $route, issueService) {
+        function IssueController($scope, $routeParams, $route, getIssueByIdService, issueService) {
             var issueId = $routeParams.Id;
 
-            issueService.getCurrentIssue(issueId)
+            getIssueByIdService.getIssue(issueId)
                 .then(function(currentIssue) {
                     console.log(currentIssue);
                     $scope.issue = currentIssue.data;
