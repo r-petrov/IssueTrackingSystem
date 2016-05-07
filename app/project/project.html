@@ -37,7 +37,7 @@
             Priorities: <span ng-repeat="priority in project.Priorities">{{priority.Name}}, </span>
         </div>
     </div>
-    <div class="table table-striped col-md-6">
+    <div class="table table-striped col-md-6 fixed">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -56,6 +56,43 @@
                 </tr>
             </tbody>
         </table>
+
+        <div>
+            <button ng-click="showFilters=true" class="btn btn-primary button">Show All Issues Filters</button>
+            <button ng-click="showFilters=false" class="btn btn-primary button">Hide All Issues Filters</button>
+        </div>
+        <div ng-show="showFilters" ng-hide="!showFilters">
+            <div class="flex-filters">
+                <label for="due-date">
+                    Get issues by due date:
+                    <input ng-model="search.DueDate" datetime="yyyy-MM-dd"  id="due-date" type="text" placeholder="yyyy-MM-dd">
+                </label>
+                <label for="assignee">
+                    Get issues by due assignee username:
+                    <input ng-model="search.Assignee.Username" id="assignee" type="text">
+                </label>
+            </div>
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Due Date</th>
+                        <th>Assignee</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="issue in allIssues | filter:search">
+                        <td><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
+                        <td>{{issue.Description}}</td>
+                        <td>{{issue.DueDate}}</td>
+                        <td>{{issue.Assignee.Username}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 

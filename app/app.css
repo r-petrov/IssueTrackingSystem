@@ -34,6 +34,11 @@ label {
     justify-content: space-between;
 }
 
+.flex-filters {
+    display: flex;
+    justify-content: space-around;
+}
+
 .center {
   text-align: center;
 }
@@ -88,9 +93,7 @@ label {
 .button-display {
     display: block;
 }
-
 /*
 .fixed {
     table-layout: fixed;
-}
-*/
+}*/

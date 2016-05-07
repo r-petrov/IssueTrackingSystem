@@ -44,4 +44,13 @@ angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'iss
                     console.log(error);
                 });
 
+            projectIssuesService.getAllIssues()
+                .then(function(allIssues) {
+                    console.log(allIssues);
+                    $scope.allIssues = allIssues.data.Issues;
+                },
+                function(error) {
+                    console.log(error);
+                });
+
         }]);
