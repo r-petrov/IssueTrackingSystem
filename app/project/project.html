@@ -5,7 +5,7 @@
 </header>
 <div class="flex-elements">
     <div class="col-md-6">
-        <div ng-if="isAdmin || currentUser.Id === project.Lead.Id">
+        <div ng-if="isAdmin || currentUserId === project.Lead.Id">
             {{project.ProjectKey}}
             <button class="btn btn-primary button">
                 <a href="#/projects/{{project.Id}}/edit">Edit</a>
@@ -37,7 +37,7 @@
             Priorities: <span ng-repeat="priority in project.Priorities">{{priority.Name}}, </span>
         </div>
     </div>
-    <div class="table table-striped col-md-6 fixed">
+    <div class="table table-striped col-md-6">
         <table class="table table-striped">
             <thead>
                 <tr>

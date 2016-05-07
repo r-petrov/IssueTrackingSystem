@@ -18,33 +18,41 @@ angular.module('issueTrackingSystem.dashboard.dashboardIssuesService', [])
                                 issuesByProjects = [],
                                 issues = response.data.Issues,
                                 issuesLength = issues.length;
+                            console.log(issuesLength);
 
-                            previousIssue = issues[0];
-                            projectIssues.push(previousIssue);
-                            for (i = 1; i < issuesLength; i++) {
-                                currentIssue = issues[i];
-                                if (currentIssue.Project.Name === previousIssue.Project.Name) {
-                                    projectIssues.push(currentIssue);
-                                }
-                                else {
-                                    projectIssues.sort(function(a, b) {
-                                        return new Date(b.DueDate) - new Date(a.DueDate);
-                                    });
+                            if (issuesLength > 1) {
+                                previousIssue = issues[0];
+                                projectIssues.push(previousIssue);
+                                for (i = 1; i < issuesLength; i++) {
+                                    currentIssue = issues[i];
+                                    if (currentIssue.Project.Name === previousIssue.Project.Name) {
+                                        projectIssues.push(currentIssue);
+                                    }
+                                    else {
+                                        projectIssues.sort(function(a, b) {
+                                            return new Date(b.DueDate) - new Date(a.DueDate);
+                                        });
 
-                                    issuesByProjects.push(projectIssues);
-                                    projectIssues = [];
-                                    projectIssues.push(currentIssue);
-                                }
+                                        issuesByProjects.push(projectIssues);
+                                        projectIssues = [];
+                                        projectIssues.push(currentIssue);
+                                    }
 
-                                previousIssue = currentIssue;
-                                if (i === issues.length - 1) {
-                                    projectIssues.sort(function(a, b) {
-                                        return new Date(b.DueDate) - new Date(a.DueDate);
-                                    });
+                                    previousIssue = currentIssue;
+                                    if (i === issues.length - 1) {
+                                        projectIssues.sort(function(a, b) {
+                                            return new Date(b.DueDate) - new Date(a.DueDate);
+                                        });
 
-                                    issuesByProjects.push(projectIssues);
+                                        issuesByProjects.push(projectIssues);
+                                    }
                                 }
                             }
+                            else {
+                                projectIssues.push(issues[0]);
+                                issuesByProjects.push(projectIssues);
+                            }
+
 
                             deferred.resolve(issuesByProjects);
                         },
