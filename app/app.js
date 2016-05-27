@@ -4,6 +4,9 @@
 angular.module('issueTrackingSystem', [
         'ngRoute',
         'ngCookies',
+        'ui.bootstrap',
+        'bw.paging',
+        'angularUtils.directives.dirPagination',
         'issueTrackingSystem.common.mainController',
         'issueTrackingSystem.common.previousPageController',
         'issueTrackingSystem.common.autoCompleteDirective',
@@ -38,6 +41,7 @@ angular.module('issueTrackingSystem', [
         'issueTrackingSystem.common.getIssueByIdService',
         'issueTrackingSystem.editIssue.editIssueController',
         'issueTrackingSystem.editIssue.editIssueService',
+        'issueTrackingSystem.common.pagination',
     ])
     .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
         $httpProvider.interceptors.push(['$q', 'toastr', function($q, toastr) {
@@ -93,4 +97,6 @@ angular.module('issueTrackingSystem', [
         }
     }])*/
     .constant('toastr', toastr)
-    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/');
+    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
+    .constant('MAX_SIZE', 5)
+    .constant('PAGE_SIZE', 10);

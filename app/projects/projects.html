@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="project in projects">
+            <tr ng-repeat="project in projects.projects">
                 <td>
                     {{project.Name}}
                     <button class="btn btn-primary button">
@@ -20,9 +20,10 @@
             </tr>
         </tbody>
     </table>
+    <!--<div pagination num-pages="numberOfPages" current-page="currentPage" max="5"></div>-->
+    <uib-pagination boundary-links="true" total-items="totalItems.projectsCount" items-per-page="pageSize.itemsPerPage" max-size="maxSize.paginationSize" ng-model="currentPage.projectsPage" ng-change="setProjectsPage.setProjects()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
+
     <button class="btn btn-primary button">
         <a href="#/projects/add">Add new project</a>
     </button>
-
-    <!-- todo make pagination -->
 </div>

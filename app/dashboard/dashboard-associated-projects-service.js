@@ -8,17 +8,18 @@ angular.module('issueTrackingSystem.dashboard.dashboardAssociatedProjectsService
         'BASE_URL',
         'identityService',
         function dashboardAssociatedProjectsService($http, $q, BASE_URL, identityService) {
-            function getAssociatedProjcets(pageSize) {
+            function getAssociatedProjects(pageSize, pageNumber) {
                 var associatedProjectsUrl,
                     currentUserId,
                     deferred = $q.defer(),
-                    currentPageSize = pageSize || 140;
+                    currentPageSize = pageSize || 140,
+                    currentPageNumber = pageNumber || 1;
                      //BASE_URL + 'Issues/?pageSize=' + currentPageSize + '&pageNumber=1&filter={value}Project.LeadId=';
 
                 identityService.getCurrentUser()
                     .then(function(currentUser) {
                         currentUserId = currentUser.data.Id;
-                        associatedProjectsUrl = BASE_URL + 'projects?filter=Lead.Id=\"' + currentUserId + '\"&pageSize=' + currentPageSize + '&pageNumber=1';
+                        associatedProjectsUrl = BASE_URL + 'projects?filter=Lead.Id=\"' + currentUserId + '\"&pageSize=' + currentPageSize + '&pageNumber=' + currentPageNumber;
                         $http.get(associatedProjectsUrl)
                             .then(function(associatedProjects) {
                                 deferred.resolve(associatedProjects);
@@ -35,6 +36,6 @@ angular.module('issueTrackingSystem.dashboard.dashboardAssociatedProjectsService
             }
 
             return {
-                getAssociatedProjects: getAssociatedProjcets
+                getAssociatedProjects: getAssociatedProjects
             }
         }]);

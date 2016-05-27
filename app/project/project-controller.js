@@ -24,33 +24,66 @@ angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'iss
         '$routeParams',
         'getProjectByIdService',
         'projectIssuesService',
-        function ProjectController($scope, $routeParams, getProjectByIdService, projectIssuesService) {
+        'PAGE_SIZE',
+        'MAX_SIZE',
+        function ProjectController($scope, $routeParams, getProjectByIdService, projectIssuesService, PAGE_SIZE, MAX_SIZE) {
             var projectId = $routeParams.Id;
+            $scope.pageSize = {
+                itemsPerPage: PAGE_SIZE
+            };
+            $scope.maxSize = {
+                paginationSize: MAX_SIZE
+            };
+            $scope.currentPage = {
+                projectsIssuesPage: 1,
+                allIssuesPage: 1
+            };
+            $scope.totalItems = {
+                projectsIssuesCount: 0,
+                allIssuesCount: 0
+            };
 
             getProjectByIdService.getProjectById(projectId)
                 .then(function(project) {
                     console.log(project.data);
-                    $scope.project = project.data;
+                    $scope.project = {
+                        currentProject: project.data
+                    };
                 },
                 function(error) {
                     console.log(error);
                 });
 
-            projectIssuesService.getProjectIssues(projectId)
-                .then(function(projectIssues) {
-                    $scope.issues = projectIssues.data.Issues;
+            $scope.setProjectPage = {
+                setProjectsIssues: function() {
+                    projectIssuesService.getProjectIssues(projectId, $scope.pageSize.itemsPerPage, $scope.currentPage.projectsIssuesPage)
+                        .then(function(projectIssues) {
+                                console.log(projectIssues);
+                                $scope.totalItems.projectsIssuesCount = projectIssues.data.TotalCount;
+                                $scope.issues = {
+                                    projectsIssues: projectIssues.data.Issues
+                                };
+                            },
+                            function(error) {
+                                console.log(error);
+                            });
                 },
-                function(error) {
-                    console.log(error);
-                });
+                setAllIssues: function() {
+                    projectIssuesService.getAllIssues(projectId, $scope.pageSize.itemsPerPage, $scope.currentPage.allIssuesPage)
+                        .then(function(allIssues) {
+                                console.log(allIssues);
+                                $scope.totalItems.allIssuesCount = allIssues.data.TotalCount;
+                                $scope.allIssues = {
+                                    allIssues: allIssues.data.Issues
+                                };
+                            },
+                            function(error) {
+                                console.log(error);
+                            });
+                }
+            };
 
-            projectIssuesService.getAllIssues()
-                .then(function(allIssues) {
-                    console.log(allIssues);
-                    $scope.allIssues = allIssues.data.Issues;
-                },
-                function(error) {
-                    console.log(error);
-                });
+            $scope.setProjectPage.setProjectsIssues();
 
+            $scope.setProjectPage.setAllIssues();
         }]);

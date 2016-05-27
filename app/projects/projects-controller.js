@@ -24,9 +24,45 @@ angular.module('issueTrackingSystem.projects.projectsController',
     .controller('ProjectsController', [
         '$scope',
         'getProjectsService',
-        function ProjectsController($scope, getProjectsService) {
-            getProjectsService.getProjects()
-                .then(function(projects) {
-                    $scope.projects = projects.data;
-                });
+        'PAGE_SIZE',
+        'MAX_SIZE',
+        function ProjectsController($scope, getProjectsService, PAGE_SIZE, MAX_SIZE) {
+            $scope.pageSize = {
+                itemsPerPage: PAGE_SIZE
+            };
+            $scope.maxSize = {
+                paginationSize: MAX_SIZE
+            };
+            $scope.currentPage = {
+                projectsPage: 1
+            };
+            $scope.totalItems = {
+                projectsCount: 0
+            };
+            /*getProjectsService.getAllProjects()
+                .then(function(allProjects) {
+                    /!*$scope.numberOfPages = Math.ceil(allProjects.data.length / $scope.pageSize);*!/
+
+
+                    //$scope.$watch('currentPage', $scope.setPage);
+
+
+                },
+                function(error) {
+                    console.log(error);
+                });*/
+
+            $scope.setProjectsPage = {
+                setProjects: function() {
+                    getProjectsService.getProjects($scope.pageSize.itemsPerPage, $scope.currentPage.projectsPage)
+                        .then(function(projects) {
+                            $scope.projects = {
+                                projects: projects.data.Projects
+                            };
+                            $scope.totalItems.projectsCount = projects.data.TotalCount;
+                        });
+                }
+            };
+
+            $scope.setProjectsPage.setProjects();
         }]);

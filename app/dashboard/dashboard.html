@@ -1,10 +1,11 @@
+<h2>Dashboard</h2>
 <div>
-    <h2>Dashboard</h2>
+    <h2>Affiliated projects</h2>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>
-                    <h3>Affiliated projects</h3>
+                    <h3>User is an issue assignee</h3>
                 </th>
                 <th>
                     <h3>Issues</h3>
@@ -12,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="issue in issues">
+            <tr ng-repeat="issue in issues.assigneeUsersIssues">
                 <td class="project-name">
                     <a href="#/projects/{{issue.projectId}}">{{issue.projectName}}</a>
                 </td>
@@ -27,7 +28,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="currentIssue in issue.issuesByProject">
+                            <tr ng-repeat="currentIssue in issue.issuesByProject" pagination-id="issues">
                                 <td>
                                     <a href="#/issues/{{currentIssue.Id}}">{{currentIssue.Title}}</a>
                                 </td>
@@ -41,13 +42,30 @@
                     </table>
                 </td>
             </tr>
-            <tr ng-repeat="project in associatedProjects">
+
+        </tbody>
+    </table>
+
+    <uib-pagination boundary-links="true" total-items="totalItems.issuesCount" items-per-page="pageSize.itemsPerPage" max-size="maxSize.paginationSize" ng-model="currentPage.issuesPage" ng-change="setDashboardPage.setIssuesPanel()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
+
+    <!--<div pagination num-pages="numberOfPages" current-page="currentPage" pagination-id="issues"></div>-->
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <h3>User is a project leader</h3>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="project in associatedProjects.associatedUsersProjects" pagination-id="projects">
                 <td class="project-name">
                     <a href="#/projects/{{project.Id}}">{{project.Name}}</a>
                 </td>
             </tr>
         </tbody>
     </table>
-
-    <!-- todo make pagination -->
+    <!--<div pagination num-pages="numberOfProjectsPages" current-page="currentPage" pagination-id="projects"></div>-->
+    <uib-pagination boundary-links="true" total-items="totalItems.projectsCount" items-per-page="pageSize.itemsPerPage" max-size="maxSize.paginationSize" ng-model="currentPage.projectsPage" ng-change="setDashboardPage.setProjectsPanel()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
 </div>
