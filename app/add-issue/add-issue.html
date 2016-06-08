@@ -1,50 +1,57 @@
-<div ng-controller="GetUsersController" class="jumbotron">
-    <header>
-        <h3 class="header-styles">
-            Add Issue
-        </h3>
-    </header>
-    <form name="addIssueForm" class="col-md-6 col-md-offset-2 border">
-        <label for="title">
-            Title
-            <input ng-model="issue.Title" id="title" type="text" required="required" placeholder="Issue Title"/>
-        </label>
-        <label for="description">
-            Description
-            <textarea ng-model="issue.Description" id="description" required="required" placeholder="Issue Description"></textarea>
-        </label>
-        <label for="project-name">
-            Project
-            <input id="project-name" type="text" value="{{projectName}}" readonly="readonly" />
-        </label>
-        <label for="assignee-id">
-            AssigneeId
-            <select ng-model="issue.AssigneeId" id="assignee-id" name="assignee-id" required="required">
-                <option ng-repeat="user in users" value="{{user.Id}}" >{{user.Username}}</option>
-            </select>
-        </label>
-        <label for="priority-id">
-            PriorityId
-            <select ng-model="issue.PriorityId" id="priority-id" name="priority-id" required="required">
-                <option ng-repeat="priority in priorities" value="{{priority.Id}}" >
-                    {{priority.Name}}
-                </option>
-            </select>
-        </label>
-        <label for="due-date">
-            DueDate
-            <input ng-model="issue.DueDate" id="due-date" type="date" required="required" placeholder="yyyy/MM/dd"/>
-            <!--<input datetime="yyyy/MM/dd" ng-model="issue.DueDate" id="due-date" type="text" required="required" placeholder="yyyy/MM/dd"/>-->
-        </label>
-        <!--<label for="labels">
-            Labels
-            <input auto-complete-directive ui-items="{{labels}}" ng-model="issue.Labels" id="labels" type="text" />
-        </label>-->
-        <button ng-disabled="addIssueForm.$invalid" ng-click="addIssue(issue)" class="btn btn-primary button" type="submit">
-            Add Issue
-        </button>
-        <button class="btn btn-primary button" ng-click="back()">
-            Go Back To Project
-        </button>
-    </form>
+<div ng-controller="GetUsersController" class="modal-content modal-dialog">
+    <div class="modal-header">
+        <header>
+            <h3 class="header-styles">
+                Add Issue
+            </h3>
+        </header>
+    </div>
+    <div class="modal-body">
+        <form name="addIssueForm">
+            <label for="title">
+                Title
+                <input ng-model="issue.Title" id="title" type="text" required="required" placeholder="Issue Title"/>
+            </label>
+            <label for="description">
+                Description
+                <textarea ng-model="issue.Description" id="description" required="required" placeholder="Issue Description"></textarea>
+            </label>
+            <label for="project-name">
+                Project
+                <input id="project-name" type="text" value="{{projectName}}" readonly="readonly" />
+            </label>
+            <label for="assignee-id">
+                AssigneeId
+                <select ng-model="issue.AssigneeId" id="assignee-id" name="assignee-id" required="required">
+                    <option ng-repeat="user in users" value="{{user.Id}}" >{{user.Username}}</option>
+                </select>
+            </label>
+            <label for="priority-id">
+                PriorityId
+                <select ng-model="issue.PriorityId" id="priority-id" name="priority-id" required="required">
+                    <option ng-repeat="priority in priorities" value="{{priority.Id}}" >
+                        {{priority.Name}}
+                    </option>
+                </select>
+            </label>
+            <label for="due-date">
+                DueDate
+                <input ng-model="issue.DueDate" id="due-date" type="date" required="required" placeholder="yyyy/MM/dd"/>
+                <!--<input datetime="yyyy/MM/dd" ng-model="issue.DueDate" id="due-date" type="text" required="required" placeholder="yyyy/MM/dd"/>-->
+            </label>
+            <!--<label for="labels">
+                Labels
+                <input auto-complete-directive ui-items="{{labels}}" ng-model="issue.Labels" id="labels" type="text" />
+            </label>-->
+            <button ng-disabled="addIssueForm.$invalid" ng-click="addIssue(issue)" class="btn btn-primary button" type="submit">
+                Add Issue
+            </button>
+            <!--<button class="btn btn-primary button" ng-click="back()">
+                Go Back To Project
+            </button>-->
+            <button class="btn btn-primary button" ng-click="cancel()">
+                Go Back To Project
+            </button>
+        </form>
+    </div>
 </div>

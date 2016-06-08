@@ -2,7 +2,7 @@
  * Created by PC on 22.04.2016 г..
  */
 angular.module('issueTrackingSystem.addProject.addProjectController', ['ngRoute', 'issueTrackingSystem.addProject.addProjectService'])
-    .config(['$routeProvider', function($routeProvider) {
+    /*.config(['$routeProvider', function($routeProvider) {
         var routeChecks = {
             isAuthenticated: ['$q', 'authenticationService', function($q, authenticationService) {
                 if (authenticationService.isAuthenticated()) {
@@ -18,17 +18,18 @@ angular.module('issueTrackingSystem.addProject.addProjectController', ['ngRoute'
             controller: 'AddProjectController',
             resolve:  routeChecks.isAuthenticated
         });
-    }])
+    }])*/
     .controller('AddProjectController', [
         '$scope',
+        '$uibModalInstance',
         'addProjectService',
-        function AddProjectController($scope, addProjectService) {
+        function AddProjectController($scope, $uibModalInstance, addProjectService) {
             $scope.addProject = function(project) {
                 console.log(project);
                 if (project.Name && project.Description && project.ProjectKey && project.LeadId && project.Priorities) {
                     addProjectService.addProject(project)
                         .then(function(addedProject) {
-                                $scope.back();
+                                $uibModalInstance.close(addedProject);
                             },
                             function(error) {
                                 console.log(error);
@@ -37,5 +38,9 @@ angular.module('issueTrackingSystem.addProject.addProjectController', ['ngRoute'
                 else {
                     toastr.error('Project Name, Project Description, Project Key and Project LeadId are mandatory fields!');
                 }
+            };
+
+            $scope.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
             }
         }]);

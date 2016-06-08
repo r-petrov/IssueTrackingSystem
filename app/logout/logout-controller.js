@@ -5,7 +5,7 @@ angular.module('issueTrackingSystem.logout', [
         'ngRoute',
         'issueTrackingSystem.users.authenticationService'
     ])
-    .config(['$routeProvider', function($routeProvider) {
+    /*.config(['$routeProvider', function($routeProvider) {
         var routeChecks = {
             isAuthenticated: ['$q', 'authenticationService', function($q, authenticationService) {
                 if (authenticationService.isAuthenticated()) {
@@ -21,15 +21,16 @@ angular.module('issueTrackingSystem.logout', [
             controller: 'LogoutController',
             resolve: routeChecks.isAuthenticated
         });
-    }])
+    }])*/
     .controller('LogoutController', [
         '$scope',
         '$rootScope',
         '$location',
         '$window',
+        '$uibModalInstance',
         'authenticationService',
         'toastr',
-        function LogoutController($scope, $rootScope, $location,  $window, authenticationService, toastr) {
+        function LogoutController($scope, $rootScope, $location,  $window, $uibModalInstance, authenticationService, toastr) {
             $scope.logout = function(currentUser) {
                 authenticationService.logout(currentUser)
                     .then(function(success) {
@@ -39,5 +40,9 @@ angular.module('issueTrackingSystem.logout', [
                         $window.location.reload();
                         //$rootScope.isAuthenticated = false;
                     });
+            };
+
+            $scope.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
             }
     }]);

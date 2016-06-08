@@ -91,7 +91,12 @@ label {
 }
 
 .button-display {
+    margin-top: 20px;
     display: block;
+}
+
+.modal-dialog {
+    background-color: #EEEEEE;
 }
 /*
 .fixed {

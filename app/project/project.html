@@ -10,8 +10,11 @@
             <button class="btn btn-primary button">
                 <a href="#/projects/{{project.currentProject.Id}}/edit">Edit</a>
             </button>
-            <button class="btn btn-primary button">
+            <!--<button class="btn btn-primary button">
                 <a href="#/projects/{{project.currentProject.Id}}/add-issue">Add Issue</a>
+            </button>-->
+            <button class="btn btn-primary button" ng-click="openAddIssueModal()">
+                Add Issue
             </button>
         </div>
         <div>

@@ -1,44 +1,54 @@
-<div ng-controller="GetUsersController">
-    <header>
-        <h3 class="header-styles">
-            New Project
-        </h3>
-    </header>
-    <form name="addProjectForm" class="col-md-6 col-md-offset-2 border">
-        <label for="name">
-            Name
-        </label>
-        <input ng-model="project.Name" id="name" type="text" required="required" placeholder="Project Name" />
-        <label for="description">
-            Description
-        </label>
-        <textarea ng-model="project.Description" id="description" required="required" placeholder="Project Description"></textarea>
-        <label for="project-key">
-            Project Key
-        </label>
-        <input ng-model="project.ProjectKey" id="project-key" type="text" required="required" placeholder="Project Key" />
-        <label for="lead-id">
-            LeadId
-        </label>
-        <select ng-model="project.LeadId" id="lead-id" required="required">
-            <option ng-repeat="user in users" value="{{user.Id}}" >{{user.Username}}</option>
-        </select>
-        <label for="priorities">
-            Priorities (comma separated)
-        </label>
-        <input ng-model="project.Priorities" id="priorities" type="text" placeholder="Project Priorities" required="required" />
-        <label for="labels">
-            Labels (comma separated)
-        </label>
-        <input ng-model="project.Labels" id="labels" type="text" placeholder="Project Labels" />
-    </form>
-    <button ng-disabled="addProjectForm.$invalid || addProjectForm.$pending" ng-click="addProject(project)" class="btn btn-primary button" type="submit">
-        Add Project
-    </button>
-    <button class="btn btn-primary button" ng-click="back()">
-        Go Back To Projects
-    </button>
+<div ng-controller="GetUsersController" class="modal-content modal-dialog">
+    <div class="modal-header">
+        <header>
+            <h3 class="header-styles">
+                New Project
+            </h3>
+        </header>
+    </div>
+    <div class="modal-body">
+        <form name="addProjectForm">
+            <label for="name">
+                Name
+            </label>
+            <input ng-model="project.Name" id="name" type="text" required="required" placeholder="Project Name" />
+            <label for="description">
+                Description
+            </label>
+            <textarea ng-model="project.Description" id="description" required="required" placeholder="Project Description"></textarea>
+            <label for="project-key">
+                Project Key
+            </label>
+            <input ng-model="project.ProjectKey" id="project-key" type="text" required="required" placeholder="Project Key" />
+            <label for="lead-id">
+                LeadId
+            </label>
+            <select ng-model="project.LeadId" id="lead-id" required="required">
+                <option ng-repeat="user in users" value="{{user.Id}}" >{{user.Username}}</option>
+            </select>
+            <label for="priorities">
+                Priorities (comma separated)
+            </label>
+            <input ng-model="project.Priorities" id="priorities" type="text" placeholder="Project Priorities" required="required" />
+            <label for="labels">
+                Labels (comma separated)
+            </label>
+            <input ng-model="project.Labels" id="labels" type="text" placeholder="Project Labels" />
+            <div class="button-display">
+                <button ng-disabled="addProjectForm.$invalid || addProjectForm.$pending" ng-click="addProject(project)" class="btn btn-primary button" type="submit">
+                    Add Project
+                </button>
+                <!--<button class="btn btn-primary button" data-dismiss="modal" ng-click="back()">
+                        Go Back To Projects
+                </button>-->
+                <button class="btn btn-primary button" data-dismiss="modal" ng-click="cancel()">
+                    Go Back To Projects
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
+
 
 <!--todo make a modal dialog-->
 <!--todo make a input autocomplete -->

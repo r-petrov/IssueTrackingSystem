@@ -4,8 +4,10 @@
 angular.module('issueTrackingSystem.common.mainController', [])
     .controller('MainController', [
         '$rootScope',
+        '$scope',
+        '$uibModal',
         'identityService',
-        function MainController($rootScope, identityService) {
+        function MainController($rootScope, $scope, $uibModal, identityService) {
             identityService.getCurrentUser()
                 .then(function(currentUser) {
                     $rootScope.currentUser = currentUser;
@@ -19,4 +21,12 @@ angular.module('issueTrackingSystem.common.mainController', [])
                 function(error) {
                     console.log(error);
                 });
+
+            $scope.openLogoutModal = function() {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/logout/logout.html',
+                    controller: 'LogoutController',
+                    size: 'lg',
+                });
+            }
         }]);

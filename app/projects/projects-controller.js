@@ -23,10 +23,12 @@ angular.module('issueTrackingSystem.projects.projectsController',
     }])
     .controller('ProjectsController', [
         '$scope',
+        '$uibModal',
+        '$location',
         'getProjectsService',
         'PAGE_SIZE',
         'MAX_SIZE',
-        function ProjectsController($scope, getProjectsService, PAGE_SIZE, MAX_SIZE) {
+        function ProjectsController($scope, $uibModal, $location, getProjectsService, PAGE_SIZE, MAX_SIZE) {
             $scope.pageSize = {
                 itemsPerPage: PAGE_SIZE
             };
@@ -65,4 +67,12 @@ angular.module('issueTrackingSystem.projects.projectsController',
             };
 
             $scope.setProjectsPage.setProjects();
+
+            $scope.openAddProjectModal = function() {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/add-project/add-project.html',
+                    controller: 'AddProjectController',
+                    size: 'lg',
+                });
+            }
         }]);

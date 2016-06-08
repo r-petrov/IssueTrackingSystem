@@ -22,11 +22,12 @@ angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'iss
     .controller('ProjectController', [
         '$scope',
         '$routeParams',
+        '$uibModal',
         'getProjectByIdService',
         'projectIssuesService',
         'PAGE_SIZE',
         'MAX_SIZE',
-        function ProjectController($scope, $routeParams, getProjectByIdService, projectIssuesService, PAGE_SIZE, MAX_SIZE) {
+        function ProjectController($scope, $routeParams, $uibModal, getProjectByIdService, projectIssuesService, PAGE_SIZE, MAX_SIZE) {
             var projectId = $routeParams.Id;
             $scope.pageSize = {
                 itemsPerPage: PAGE_SIZE
@@ -86,4 +87,12 @@ angular.module('issueTrackingSystem.project.projectController', ['ngRoute', 'iss
             $scope.setProjectPage.setProjectsIssues();
 
             $scope.setProjectPage.setAllIssues();
+
+            $scope.openAddIssueModal = function() {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/add-issue/add-issue.html',
+                    controller: 'AddIssueController',
+                    size: 'lg',
+                });
+            }
         }]);

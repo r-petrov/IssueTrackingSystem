@@ -23,7 +23,11 @@
     <!--<div pagination num-pages="numberOfPages" current-page="currentPage" max="5"></div>-->
     <uib-pagination boundary-links="true" total-items="totalItems.projectsCount" items-per-page="pageSize.itemsPerPage" max-size="maxSize.paginationSize" ng-model="currentPage.projectsPage" ng-change="setProjectsPage.setProjects()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
 
-    <button class="btn btn-primary button">
+    <!--<button class="btn btn-primary button button-display">
         <a href="#/projects/add">Add new project</a>
+    </button>-->
+
+    <button class="btn btn-primary button button-display" ng-click="openAddProjectModal()">
+        Add new project
     </button>
 </div>

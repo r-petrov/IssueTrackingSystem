@@ -22,10 +22,11 @@ angular.module('issueTrackingSystem.addIssue.addIssueController', ['ngRoute'])
     .controller('AddIssueController', [
         '$scope',
         '$routeParams',
+        '$uibModalInstance',
         'getProjectByIdService',
         'getProjectsService',
         'addIssueService',
-        function AddIssueController($scope, $routeParams, getProjectByIdService, getProjectsService, addIssueService) {
+        function AddIssueController($scope, $routeParams, $uibModalInstance, getProjectByIdService, getProjectsService, addIssueService) {
             var projectId = $routeParams.Id;
             getProjectByIdService.getProjectById(projectId)
                 .then(function(project) {
@@ -66,4 +67,8 @@ angular.module('issueTrackingSystem.addIssue.addIssueController', ['ngRoute'])
                     $scope.projects = projects.data;
                     console.log(projects.data);
                 });*/
+
+            $scope.cancel = function() {
+                $uibModalInstance.dismiss('cancel');
+            }
         }]);
